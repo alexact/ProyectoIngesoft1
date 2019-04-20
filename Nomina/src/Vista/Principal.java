@@ -5,7 +5,6 @@
  */
 package Vista;
 
-
 import Modelo.CargoMapeo;
 import Modelo.TrabajadorMapeo;
 import java.sql.SQLException;
@@ -17,16 +16,16 @@ import javax.swing.JInternalFrame;
  *
  * @author salas
  */
-public class PrincipalGestorNomina extends javax.swing.JFrame {
+public class Principal extends javax.swing.JFrame {
 
     /**
      * Creates new form Principal
      */
-    public PrincipalGestorNomina() throws SQLException {
+    public Principal() throws SQLException {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
-        tm.subirALista();
         cm.subirALista();
+        tm.subirALista();
 
         //Trabajador trabajador = new Trabajador();
         //trabajador.leerArchivoC();
@@ -47,6 +46,7 @@ public class PrincipalGestorNomina extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         Escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -115,6 +115,17 @@ public class PrincipalGestorNomina extends javax.swing.JFrame {
         });
         jToolBar1.add(jButton4);
 
+        jButton5.setText("Actualizzar");
+        jButton5.setFocusable(false);
+        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton5);
+
         javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
@@ -160,6 +171,7 @@ public class PrincipalGestorNomina extends javax.swing.JFrame {
         interno.setResizable(true);
         Escritorio.add(interno);
 
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -192,6 +204,17 @@ public class PrincipalGestorNomina extends javax.swing.JFrame {
         Escritorio.add(interno);
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+
+        JInternalFrame interno = new JInternalFrame("Actualizar Trabajador");
+        interno.add(new PanelActualizarTrabajador());
+        interno.setVisible(true);
+        interno.pack();
+        interno.setClosable(true);
+        Escritorio.add(interno);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -209,15 +232,14 @@ public class PrincipalGestorNomina extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PrincipalGestorNomina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PrincipalGestorNomina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PrincipalGestorNomina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PrincipalGestorNomina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -225,9 +247,9 @@ public class PrincipalGestorNomina extends javax.swing.JFrame {
             @Override
             public void run() {
                 try {
-                    new PrincipalGestorNomina().setVisible(true);
+                    new Principal().setVisible(true);
                 } catch (SQLException ex) {
-                    Logger.getLogger(PrincipalGestorNomina.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -239,6 +261,7 @@ public class PrincipalGestorNomina extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JToolBar jToolBar1;

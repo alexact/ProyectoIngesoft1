@@ -5,14 +5,15 @@
  */
 package Vista;
 
-
+import Control.CargoControl;
 import Control.PanelTrabajadorControl;
 import Control.TrabajadorControl;
+import Logica.TrabajadorLogica;
+import static Vista.PanelCargoTrabajador.cod;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
 
 /**
  *
@@ -369,14 +370,15 @@ public class PanelActualizarTrabajador extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         if (!cpt.aseguramientoDatos(jtxCedula.getText(), jtxNombre.getText(), jtxApellido.getText(), jtxDireccion.getText(), jtxTelefono.getText(), jtxCelular.getText(),
-                 jtxFpension.getText(), jtxFcesantias.getText(), jtxFpension.getText(), jtxArl.getText())) {
+                jtxFpension.getText(), jtxFcesantias.getText(), jtxFpension.getText(), jtxArl.getText())) {
             try {
-                if (cpt.verificarTrabajador(jtxCedula.getText(), jtxNombre.getText(), jtxApellido.getText(), jCalendar1.getDate(), jtxDireccion.getText(), jtxTelefono.getText(), jtxCelular.getText(), jtxArl.getText(), jtxFpension.getText(), jtxFcesantias.getText(), "Bien",null,trabajadorC.ControlconvertirenTrueOfalse(jComboBox1.getSelectedIndex()))) {
-                    JOptionPane.showMessageDialog(this, "Trabajador Ya  Existe");
+                if (!cpt.verificarTrabajador(jtxCedula.getText(), jtxNombre.getText(), jtxApellido.getText(), jCalendar1.getDate(), jtxDireccion.getText(), jtxTelefono.getText(), jtxCelular.getText(), jtxArl.getText(), jtxFpension.getText(), jtxFcesantias.getText(), "Bien", cargoC.getCargo(cod), trabajadorC.ControlconvertirenTrueOfalse(jComboBox1.getSelectedIndex()))) {
+                    JOptionPane.showMessageDialog(this, "Trabajador No  Existe");
                 } else {
-                    trabajadorC.crearTrabajadorC(Long.parseLong(jtxCedula.getText()), jtxNombre.getText(), jtxApellido.getText(), jCalendar1.getDate(), jtxDireccion.getText(), Integer.parseInt(jtxTelefono.getText()), Long.parseLong(jtxCelular.getText()), jtxArl.getText(), jtxFpension.getText(), jtxFcesantias.getText(), "Bien",null,trabajadorC.ControlconvertirenTrueOfalse(jComboBox1.getSelectedIndex()));
+                    trabajadorL.actualizarTrabajadorB(Long.parseLong(jtxCedula.getText()), jtxNombre.getText(), jtxApellido.getText(), jCalendar1.getDate(), jtxDireccion.getText(), Integer.parseInt(jtxTelefono.getText()), Long.parseLong(jtxCelular.getText()), jtxArl.getText(), jtxFpension.getText(), jtxFcesantias.getText(), "Bien",cargoC.getCargo(cod), trabajadorC.ControlconvertirenTrueOfalse(jComboBox1.getSelectedIndex()));
                     JOptionPane.showMessageDialog(this, "Trabajador Agregado Existosamente");
                     cpt.setText(jtxNombre, jtxApellido, jtxDireccion, jtxTelefono, jtxCelular, jtxArl, jtxCedula, jtxFpension, jtxFcesantias);
+                    
                 }
 
             } catch (NumberFormatException e) {
@@ -421,10 +423,11 @@ public class PanelActualizarTrabajador extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if(!jtxCedula2.getText().isEmpty()){
-            
-        }else{
-            JOptionPane.showMessageDialog(this,"Aun no ingresas la cedula");
+        if (!jtxCedula2.getText().isEmpty()) {
+            cpt.setTextLleno(jtxNombre, jtxApellido, jtxDireccion, jtxTelefono, jtxCelular, jtxArl, jtxCedula, jtxFpension, jtxFcesantias, trabajadorC.retornarTrabajador(Long.parseLong(jtxCedula2.getText())));
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Aun no ingresas la cedula");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -468,4 +471,7 @@ public class PanelActualizarTrabajador extends javax.swing.JPanel {
 
     PanelTrabajadorControl cpt = new PanelTrabajadorControl();
     TrabajadorControl trabajadorC = new TrabajadorControl();
+    TrabajadorLogica trabajadorL = new TrabajadorLogica();
+    CargoControl cargoC = new CargoControl();
+
 }

@@ -7,7 +7,6 @@ package Vista;
 
 import Control.CargoControl;
 import Control.TrabajadorControl;
-import Modelo.Trabajador;
 import static Modelo.Trabajador.LISTATRABAJADORES;
 import javax.swing.JOptionPane;
 import static Vista.PanelTrabajador.jtxCedula;
@@ -23,11 +22,12 @@ public class PanelCargoTrabajador extends javax.swing.JPanel {
      * Creates new form PanelCargoTrabajador
      */
     public static int cod;
+
     public PanelCargoTrabajador() {
         initComponents();
         jTable1.setModel(cargoC.listarCargosC());
         jTable1.setVisible(true);
-        
+
     }
 
     /**
@@ -109,10 +109,11 @@ public class PanelCargoTrabajador extends javax.swing.JPanel {
 
         if (jTable1.getRowSelectionAllowed() && !jtxCedula.getText().isEmpty()) {
             trabajadorC.añadirCargo(Long.parseLong(jtxCedula.getText()), LISTATRABAJADORES, cargoC.getCargo(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString())));
-            System.out.println(jTable1.getSelectedRow());
+            //System.out.println(jTable1.getSelectedRow());
             cod = Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
-            System.out.println(cod);
+            //System.out.println(cod);
             JOptionPane.showMessageDialog(this, "Agregado Exitosamente");
+            
         } else {
             JOptionPane.showMessageDialog(this, "Falta Un Valor Por Llenar");
         }

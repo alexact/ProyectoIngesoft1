@@ -8,7 +8,6 @@ package Logica;
 import Modelo.Cargo;
 import Modelo.Trabajador;
 import static Modelo.Trabajador.LISTATRABAJADORES;
-import Modelo.TrabajadorMapeo;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,17 +27,16 @@ public class TrabajadorLogica {
     public Trabajador trabajador = new Trabajador();
     public TrabajadorMapeo trabajadorMapeo = new TrabajadorMapeo();
 
-   /*public void crearTrabajador(Trabajador trabajador) {
+    /*public void crearTrabajador(Trabajador trabajador) {
         trabajador = new Trabajador();
-    }*/
-
+    }*//*
     public Trabajador consultaporCedulaGeneral(int cedula) throws SQLException {
         TrabajadorMapeo tbM = new TrabajadorMapeo();
-        trabajador = tbM.consultaExisteTrabajador(cedula);
+        trabajador = tbM.retornaTrabajador(cedula);
         return trabajador;
-    }
+    }*/
 
-    /*
+ /*
     public void guardarArchivoC() {
         String archivoC = "ArchivoT.txt";
         try {
@@ -147,12 +145,12 @@ public class TrabajadorLogica {
         return auxTrabajador;
     }
 
-    public void actualizarTrabajador(long identificacion, String nombre, String apellido, Date fecha, String direccion, int telefono, long celular, String fPension, String fCesantias, String arl, String estado, ArrayList<Trabajador> listaTrabajador, Cargo cargo, boolean esCapacitador) {
-        for (int i = 0; i < listaTrabajador.size(); i++) {
-            trabajador = listaTrabajador.get(i);
+    public void actualizarTrabajador(long identificacion, String nombre, String apellido, Date fecha, String direccion, int telefono, long celular, String fPension, String fCesantias, String arl, String estado, Cargo cargo, boolean esCapacitador) {
+        for (int i = 0; i < LISTATRABAJADORES.size(); i++) {
+            trabajador = LISTATRABAJADORES.get(i);
             Trabajador trabajadorModif = new Trabajador(identificacion, nombre, apellido, fecha, direccion, telefono, celular, fPension, fCesantias, arl, estado, cargo, esCapacitador);
             if (identificacion == trabajador.getIdentificacion()) {
-                LISTATRABAJADORES.set(this.retornaIndice(identificacion, listaTrabajador), trabajadorModif);
+                LISTATRABAJADORES.set(this.retornaIndice(identificacion, LISTATRABAJADORES), trabajadorModif);
                 break;
             }
 
@@ -200,6 +198,7 @@ public class TrabajadorLogica {
             tablaTrabajador.setValueAt(trabajador.getIdentificacion(), i, 0);
             tablaTrabajador.setValueAt(trabajador.getNombre(), i, 1);
             tablaTrabajador.setValueAt(trabajador.getApellido(), i, 2);
+            //System.out.println("iden" + trabajador.getIdentificacion() + " nom" + trabajador.getNombre() + " nomC " + trabajador.getCargo().getNombreCargo());
             if (!(trabajador.getCargo() == null)) {
                 tablaTrabajador.setValueAt(trabajador.getCargo().getNombreCargo(), i, 3);
 
@@ -213,38 +212,36 @@ public class TrabajadorLogica {
     }
 
     //-------------------- Mapeo----------------------------
-    public void crearCargoTrabajador(Trabajador trabajador) throws SQLException{
+    public void crearCargoTrabajador(Trabajador trabajador) throws SQLException {
         trabajadorMapeo.insertCargoTrabajador(trabajador);
     }
+
     public void crearTrabajador(long identificacion, String nombre, String apellido, Date fechaN, String direccion, int telefono, long celular, String fPension, String fSesantias, String arl, String estado, Cargo cargo, boolean esCapacitador) throws SQLException {
+
         Trabajador trabajadorM = new Trabajador();
+        //Trabajador con todos los atributos de la clase para llenar en la lista
         trabajador = new Trabajador(identificacion, nombre, apellido, fechaN, direccion, telefono, celular, fPension, fSesantias, arl, estado, cargo, esCapacitador);
-        trabajadorM = new Trabajador(identificacion, nombre, apellido, fechaN, direccion, telefono, celular, fPension, fSesantias, arl, estado);
+        //trabajador que sin cargo por la base de datos
+        trabajadorM = new Trabajador(identificacion, nombre, apellido, fechaN, direccion, telefono, celular, fPension, fSesantias, arl, estado, esCapacitador);
         LISTATRABAJADORES.add(trabajador);
+        //inserta en la tablaTrabajador 
         trabajadorMapeo.insertTrabajador(trabajadorM);
-        System.out.println(trabajador.getCargo().getCodigoCargo()+"----------"+trabajador.getIdentificacion());
+        //inserta en la tabla cargoTrabajador 
         trabajadorMapeo.insertCargoTrabajador(trabajador);
-        
 
     }
 
-    public Calendar calendario(Date date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        return calendar;
+    public void actualizarTrabajadorB(long identificacion, String nombre, String apellido, Date fechaN, String direccion, int telefono, long celular, String fPension, String fSesantias, String arl, String estado, Cargo cargo, boolean esCapacitador) throws SQLException {
+        Trabajador trabajadorM = new Trabajador();
+        trabajadorM = new Trabajador(identificacion, nombre, apellido, fechaN, direccion, telefono, celular, fPension, fSesantias, arl, estado, esCapacitador);
+        this.actualizarTrabajador(identificacion, nombre, apellido, fechaN, direccion, telefono, celular, fPension, fSesantias, arl, estado, cargo, esCapacitador);
+        trabajadorMapeo.updateTrabajador(trabajadorM);
     }
 
-    public String cal(Calendar calendar) {
-        String calendari;
-        calendari = calendar.get(Calendar.DAY_OF_MONTH) + "-" + calendar.get(Calendar.MONTH) + 1 + "-" + calendar.get(Calendar.YEAR);
-        return calendari;
-    }
-
-    public Trabajador consultaExisteTrabajador(long cedula) throws SQLException {
-        return trabajadorMapeo.consultaExisteTrabajador(cedula);
-    }
-    
-
+    /*
+    public Trabajador retornaTrabajador(long cedula) throws SQLException {
+        return trabajadorMapeo.retornaTrabajador(cedula);
+    }*/
     public static void main(String[] args) {
 
     }

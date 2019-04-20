@@ -141,6 +141,10 @@ public class Trabajador {
         this.fCesantias = fCesantias;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isEsCapacitador() {
         return esCapacitador;
     }
@@ -165,7 +169,7 @@ public class Trabajador {
         this.esCapacitador = esCapacitador;
     }
 
-    public Trabajador(long identificacion, String nombre, String apellido, Date fechaN, String direccion, int telefono, long celular, String fPension, String fCesantias, String arl, String estado) {
+    public Trabajador(long identificacion, String nombre, String apellido, Date fechaN, String direccion, int telefono, long celular, String fPension, String fCesantias, String arl, String estado, boolean esCapacitador) {
         this.identificacion = identificacion;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -177,9 +181,10 @@ public class Trabajador {
         this.fCesantias = fCesantias;
         this.arl = arl;
         this.estado = estado;
+        this.esCapacitador = esCapacitador;
     }
 
-    
+
 
     public Trabajador(long identificacion, String nombre, String apellido, Cargo cargo, boolean esCapacitador) {
         this.identificacion = identificacion;

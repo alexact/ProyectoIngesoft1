@@ -6,6 +6,7 @@
 package Modelo;
 
 import Globales.Conexion;
+import Modelo.Cargo;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

@@ -19,15 +19,13 @@ import javax.swing.JTextField;
 public class PanelTrabajadorControl {
 
     public TrabajadorLogica cttrabajador = new TrabajadorLogica();
-    
-    
 
     public boolean aseguramientoDatos(String identificacion, String nombre, String apellido, String direccion, String telefono, String celular, String fPension, String fSesantias, String arl, String estado) {
         return identificacion.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || direccion.isEmpty() || telefono.isEmpty() || celular.isEmpty() || fPension.isEmpty() || fSesantias.isEmpty() || arl.isEmpty();
     }
 
-    public boolean verificarTrabajador(String identificacion, String nombre, String apellido, Date fecha, String direccion, String telefono, String celular, String fPension, String fSesantias, String arl, String estado,Cargo cargo,boolean esCapacitador) {
-        cttrabajador.trabajador = new Trabajador(Long.parseLong(identificacion), nombre, apellido, fecha, direccion, Integer.parseInt(telefono), Long.parseLong(celular), fPension, fSesantias, arl, estado,cargo,esCapacitador);
+    public boolean verificarTrabajador(String identificacion, String nombre, String apellido, Date fecha, String direccion, String telefono, String celular, String fPension, String fSesantias, String arl, String estado, Cargo cargo, boolean esCapacitador) {
+        cttrabajador.trabajador = new Trabajador(Long.parseLong(identificacion), nombre, apellido, fecha, direccion, Integer.parseInt(telefono), Long.parseLong(celular), fPension, fSesantias, arl, estado, cargo, esCapacitador);
         return cttrabajador.buscarTrabajador(cttrabajador.trabajador.getIdentificacion(), LISTATRABAJADORES);
     }
 
@@ -41,5 +39,17 @@ public class PanelTrabajadorControl {
         cedula.setText("");
         fPension.setText("");
         fcesantias.setText("");
+    }
+
+    public void setTextLleno(JTextField nombre, JTextField apellido, JTextField direccion, JTextField telefono, JTextField celular, JTextField arl, JTextField cedula, JTextField fPension, JTextField fcesantias,Trabajador trabajador) {
+        apellido.setText(trabajador.getApellido());
+        nombre.setText(trabajador.getNombre());
+        direccion.setText(trabajador.getDireccion());
+        telefono.setText(String.valueOf(trabajador.getTelefono()));
+        celular.setText(String.valueOf(trabajador.getCelular()));
+        arl.setText(trabajador.getArl());
+        cedula.setText(String.valueOf(trabajador.getIdentificacion()));
+        fPension.setText(trabajador.getfPension());
+        fcesantias.setText(trabajador.getfSesantias());
     }
 }

@@ -19,41 +19,52 @@ import javax.swing.table.DefaultTableModel;
  * apellidos,fecha de nacimiento, direccion, telefono,fondo de salud, fondo de
  * pension , fondo de sesantias y ARL. El sistema debe permitir asignarle un
  * cargo a cada trabajador."
- * 
- * 
- * QUEDO UN MIERDERO LA VISTA NO SE LE OLVIDE CAMBIAR ESE EVENTO 18-04-2019-11:47
+ *
+ *
+ * QUEDO UN MIERDERO LA VISTA NO SE LE OLVIDE CAMBIAR ESE EVENTO
+ * 18-04-2019-11:47
  */
 public class TrabajadorControl {
 
     TrabajadorLogica trabajadorL = new TrabajadorLogica();
 
-    public void crearTrabajadorC(long identificacion, String nombre, String apellido, Date fechaN, String direccion, int telefono, long celular, String fPension, String fSesantias, String arl, String estado,Cargo cargo,boolean esCapacitador) throws SQLException {
-        trabajadorL.crearTrabajador(identificacion, nombre, apellido, fechaN, direccion, telefono, celular, fPension, fSesantias, arl, estado,cargo,esCapacitador);
+    public void crearTrabajadorC(long identificacion, String nombre, String apellido, Date fechaN, String direccion, int telefono, long celular, String fPension, String fSesantias, String arl, String estado, Cargo cargo, boolean esCapacitador) throws SQLException {
+        trabajadorL.crearTrabajador(identificacion, nombre, apellido, fechaN, direccion, telefono, celular, fPension, fSesantias, arl, estado, cargo, esCapacitador);
     }
 
     public void controlRetornarIndice(long identificacion, ArrayList<Trabajador> listaTrabajador) {
         trabajadorL.retornaIndice(identificacion, listaTrabajador);
     }
 
-    public void controlActualizarTrabajador(long identificacion, String nombre, String apellido, Date fechaN, String direccion, int telefono, long celular, String fPension, String fSesantias, String arl, String estado, ArrayList<Trabajador> listaTrabajador,Cargo cargo,boolean esCapacitador) {
-        trabajadorL.actualizarTrabajador(identificacion, nombre, apellido, fechaN, direccion, telefono, celular, fPension, fSesantias, arl, estado, listaTrabajador,cargo,esCapacitador);
+    public void controlActualizarTrabajador(long identificacion, String nombre, String apellido, Date fechaN, String direccion, int telefono, long celular, String fPension, String fSesantias, String arl, String estado, Cargo cargo, boolean esCapacitador) {
+        trabajadorL.actualizarTrabajador(identificacion, nombre, apellido, fechaN, direccion, telefono, celular, fPension, fSesantias, arl, estado, cargo, esCapacitador);
     }
 
     public void controlBuscarTrabajador(int codigoTrabajador, ArrayList<Trabajador> listaTrabajador) {
         trabajadorL.buscarTrabajador(codigoTrabajador, listaTrabajador);
     }
-    public DefaultTableModel listarTrabajadoresControl(){
+
+    public DefaultTableModel listarTrabajadoresControl() {
         return trabajadorL.listarTrabajador();
     }
-    public void añadirCargo(long identificacion,ArrayList<Trabajador> listaTrabajador,Cargo cargo){
-        
+
+    public void añadirCargo(long identificacion, ArrayList<Trabajador> listaTrabajador, Cargo cargo) {
+
         trabajadorL.añadirCargo(identificacion, listaTrabajador, cargo);
-        
+
     }
-    public boolean ControlconvertirenTrueOfalse(int eleccion){
+
+    public boolean ControlconvertirenTrueOfalse(int eleccion) {
+        System.out.println("eleccion" + eleccion);
+        System.out.println(eleccion == 1);
         return eleccion == 1;
     }
     
+    public Trabajador retornarTrabajador(long cadula){
+        return trabajadorL.retornarTrabajador(cadula);
+    }
+
+
     /*
     public void crearTrabajador(Trabajador trabajador) {
         LISTATRABAJADORES.add(trabajador);

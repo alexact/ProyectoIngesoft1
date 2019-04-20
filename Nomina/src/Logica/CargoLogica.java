@@ -92,6 +92,25 @@ public class CargoLogica {
         return tablaCargo;
 
     }
+    
+    public Cargo retornarCargo(int codigoCargo){
+        Cargo c = new Cargo();
+        //System.out.println("entro");
+        
+        for (int i = 0; i < LISTACARGOS.size(); i++) {
+            //System.out.println("Entro for");
+            cargo= LISTACARGOS.get(i);
+            //System.out.println(cargo.getNombreCargo());
+            if(codigoCargo==cargo.getCodigoCargo()){
+                c = cargo;
+                
+            }
+            
+        }
+        return c;
+        
+        
+    }
     //------------------Mapeo---------------------------
 
     public void crearCargo( String nombreCargo,int codigoCargo, String descripcion, Double salario) throws SQLException {

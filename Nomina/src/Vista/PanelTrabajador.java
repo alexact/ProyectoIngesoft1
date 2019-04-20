@@ -8,10 +8,10 @@ package Vista;
 import Control.CargoControl;
 import Control.PanelTrabajadorControl;
 import Control.TrabajadorControl;
-import Logica.TrabajadorLogica;
+
 import Modelo.TrabajadorMapeo;
 import static Vista.PanelCargoTrabajador.cod;
-import static Vista.PrincipalGestorNomina.Escritorio;
+import static Vista.Principal.Escritorio;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -463,7 +463,6 @@ public class PanelTrabajador extends javax.swing.JPanel {
 
     PanelTrabajadorControl cpt = new PanelTrabajadorControl();
     TrabajadorControl trabajadorC = new TrabajadorControl();
-    TrabajadorLogica trabajadorL =  new TrabajadorLogica();
     PanelCargoTrabajador panelct = new PanelCargoTrabajador();
     CargoControl cargoC = new CargoControl();
     TrabajadorMapeo trl =  new TrabajadorMapeo();

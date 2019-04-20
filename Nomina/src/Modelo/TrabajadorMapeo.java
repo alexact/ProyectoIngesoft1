@@ -6,6 +6,7 @@
 package Modelo;
 
 import Globales.Conexion;
+import Logica.CargoLogica;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
@@ -18,17 +19,17 @@ import java.util.Date;
 public class TrabajadorMapeo {
 
     Trabajador tr = new Trabajador();
+    CargoLogica cl = new CargoLogica();
 
-    public Trabajador consultaExisteTrabajador(long cedula) throws SQLException {
+    public Trabajador retornaTrabajador(long cedula) throws SQLException {
         Trabajador trabajador = new Trabajador();
-        Cargo cargo;
-        String sql = "SELECT * from trabajador where cedula=" + cedula;
+        String sql = "SELECT * from trabajador,cargotrabajador where cedulatrabajador=" + cedula;
         Conexion conexion = new Conexion();
         boolean existe;
         ResultSet resultados = conexion.consulta(sql);
         while (resultados.next()) {
             trabajador = new Trabajador(resultados.getLong("cedula"), resultados.getString("nombre"),
-                    resultados.getString("apellido"), null, false);
+                    resultados.getString("apellido"), cl.retornarCargo(resultados.getInt("codigocargo")), resultados.getBoolean("escapacitador"));
 
         }
         resultados.close();
@@ -37,41 +38,43 @@ public class TrabajadorMapeo {
 
     }
 
-    public Trabajador updateTrabajador(int cedula) throws SQLException {
-        Trabajador trabajador = new Trabajador();
-        Cargo cargo;
-        String sql = "SELECT * from trabajador where cedula=" + cedula;
+    public void updateTrabajador(Trabajador trabajador) throws SQLException {
         Conexion conexion = new Conexion();
-        boolean existe;
-        ResultSet resultados = conexion.consulta(sql);
-        while (resultados.next()) {
-            trabajador = new Trabajador(resultados.getLong("cedula"), resultados.getString("nombre"),
-                    resultados.getString("apellido"), null, false);
-
-        }
-        resultados.close();
+        String sql = "update trabajador set cedula =" + trabajador.getIdentificacion() + ", nombre="
+                + "'" + trabajador.getNombre() + "'" + ", apellido="
+                + "'" + trabajador.getApellido() + "'" + ", fechan="
+                + "to_date('" + this.cal(this.calendario(trabajador.getFechaN())) + "','YYYY/MMM/DD'), direccion="
+                + "'" + trabajador.getDireccion() + "'" + ", telefono="
+                + +trabajador.getTelefono() + ", celular ="
+                + +trabajador.getCelular() + ", fpension="
+                + "'" + trabajador.getfPension() + "'" + ", fcesantias="
+                + "'" + trabajador.getfCesantias() + "'" + ", arl="
+                + "'" + trabajador.getArl() + "'" + ", estado="
+                + "'" + trabajador.getEstado() + "'" + ", escapacitador="
+                + trabajador.isEsCapacitador() + " where cedula="+trabajador.getIdentificacion()+";";
+        conexion.transaccion(sql);
+        conexion.cerrar();
         System.out.println("DATO: " + trabajador.getNombre() + " " + trabajador.getApellido());
-        return trabajador;
 
     }
 
     public void insertTrabajador(Trabajador trabajador) throws SQLException {
 
         String sql;
-        sql = "insert into trabajador(cedula,nombre,apellido,fechaN,direccion,telefono,celular ,fPension ,fCesantias,arl,estado)"
+        sql = "insert into trabajador(cedula,nombre,apellido,fechaN,direccion,telefono,celular ,fPension ,fCesantias,arl,estado,escapacitador)"
                 + " VALUES(" + trabajador.getIdentificacion() + ","
-                + "'"+trabajador.getNombre()+"'"+ ","
-                + "'"+trabajador.getApellido()+"'" + ","
+                + "'" + trabajador.getNombre() + "'" + ","
+                + "'" + trabajador.getApellido() + "'" + ","
                 + "to_date('" + this.cal(this.calendario(trabajador.getFechaN())) + "','YYYY/MMM/DD'),"
-                + "'"+trabajador.getDireccion()+"'" + ","
+                + "'" + trabajador.getDireccion() + "'" + ","
                 + +trabajador.getTelefono() + ","
-                + +trabajador.getCelular()+ ","
-                + "'"+trabajador.getfPension()+"'" + ","
-                + "'"+trabajador.getfCesantias()+"'" + ","
-                + "'"+trabajador.getArl()+"'" + ","
-                + "'"+trabajador.getEstado()+"'" + ");";
+                + +trabajador.getCelular() + ","
+                + "'" + trabajador.getfPension() + "'" + ","
+                + "'" + trabajador.getfCesantias() + "'" + ","
+                + "'" + trabajador.getArl() + "'" + ","
+                + "'" + trabajador.getEstado() + "'" + ","
+                + trabajador.isEsCapacitador() + ");";
 
-        
         System.out.println(sql);
         Conexion conexion = new Conexion();
         boolean guardar = conexion.transaccion(sql);
@@ -96,27 +99,41 @@ public class TrabajadorMapeo {
 
     public void subirALista() throws SQLException {
         Trabajador trabajador = new Trabajador();
-        String sql = "SELECT * from trabajador";
+        //System.out.println("antes del que");
+        String sql = "SELECT * from trabajador,cargotrabajador where cedulatrabajador = cedula";
+        //System.out.println("despues del que");
         Conexion conexion = new Conexion();
         ResultSet resultados = conexion.consulta(sql);
+        //System.out.println("despues de consulta");
+        //System.out.println("res "+resultados.getCursorName());
+        //System.out.println("while"+resultados.next());
+
         while (resultados.next()) {
+            //System.out.println("por aqui");
+
+            //resultados.getString("apellido"), cl.retornarCargo(resultados.getInt("codigocargo")), resultados.getBoolean("escapacitador"));
             trabajador = new Trabajador(resultados.getLong("cedula"), resultados.getString("nombre"),
-                    resultados.getString("apellido"), null, false);
+                    resultados.getString("apellido"), resultados.getDate("fechan"), resultados.getString("direccion"),
+                    resultados.getInt("telefono"), resultados.getLong("celular"), resultados.getString("fpension"),
+                    resultados.getString("fcesantias"), resultados.getString("arl"), resultados.getString("estado"), cl.retornarCargo(resultados.getInt("codigocargo")), resultados.getBoolean("escapacitador"));
+//System.out.println("list"+ resultados.getInt("codigocargo"));
             Trabajador.LISTATRABAJADORES.add(trabajador);
         }
         resultados.close();
 
     }
 
+    //Convierte Date a Calendar
     public Calendar calendario(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         return calendar;
     }
 
+    // Convierte Calendar a String
     public String cal(Calendar calendar) {
         String calendari;
-        calendari = calendar.get(Calendar.YEAR) + "-" + "04" + "-" + calendar.get(Calendar.DAY_OF_MONTH);
+        calendari = calendar.get(Calendar.DAY_OF_MONTH) + "-" + calendar.get(Calendar.MONTH) + "-" + calendar.get(Calendar.YEAR);
         return calendari;
     }
 
@@ -131,7 +148,7 @@ public class TrabajadorMapeo {
     public static void main(String[] args) throws SQLException {
         TrabajadorMapeo tm = new TrabajadorMapeo();
         Trabajador tr = new Trabajador();
-        tr = new Trabajador(788, "Camilo", "lido", null, "asdasd", 0, 0, "asdasd", "asdas", "asd", "asdasd");
+        //tr = new Trabajador(788, "Camilo", "lido", null, "asdasd", 0, 0, "asdasd", "asdas", "asd", "asdasd");
         tm.insertTrabajador(tr);
 
     }
