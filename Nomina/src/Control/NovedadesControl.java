@@ -23,6 +23,10 @@ public class NovedadesControl {
     public NovedadesControl(){
        
     }
+    public boolean consultanombreTrabPorCedula(int idTrabajador){
+        NovedadesLogica nl=new NovedadesLogica();
+        return nl.consultarNombreTrabajador(idTrabajador);
+    }
     public void editarNovedades(int idNovedad, int cantHoras) throws SQLException{
          NovedadesLogica nl=new NovedadesLogica();
          nl.editarNovedades(cantHoras, idNovedad);

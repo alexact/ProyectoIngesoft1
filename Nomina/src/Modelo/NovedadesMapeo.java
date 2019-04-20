@@ -62,7 +62,7 @@ public NovedadModelo consultarNovedadPorIdNovedad(int idNovedad) throws SQLExcep
         ResultSet resultados = conexion.consulta(sql);
             while (resultados.next()) {
                 novedades=new NovedadModelo(resultados.getInt("id_novedades"),resultados.getInt("idtraba"),
-                "Alexandra CastañoCONSULTARENTRABAJOR",resultados.getInt("idtipo_novedad"),tipoNovedadMapeo.consultarNombreTipoNovporId( resultados.getInt("idtipo_novedad")),
+                null,resultados.getInt("idtipo_novedad"),tipoNovedadMapeo.consultarNombreTipoNovporId( resultados.getInt("idtipo_novedad")),
                         resultados.getInt("cant_horas"), resultados.getString("fecha_inicio"),resultados.getString("fecha_fin"));
             }
             resultados.close();
