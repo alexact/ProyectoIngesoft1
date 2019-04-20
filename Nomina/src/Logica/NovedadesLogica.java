@@ -17,15 +17,30 @@ import javax.swing.table.DefaultTableModel;
  * @author Alexandra
  */
 public class NovedadesLogica {
-
+    String nombreTrabajador;
     
     public NovedadesLogica() {
+        
     }
     public void eliminarNovedad(int idNovedad){
         NovedadesMapeo novedadM=new NovedadesMapeo();
         novedadM.delete(idNovedad);
     }
 
+     public boolean consultarNombreTrabajador(int idTrabajador){
+        TrabajadorLogica tbL=new TrabajadorLogica();
+         boolean nombreTrabajador;
+        if(tbL.retornarTrabajador(idTrabajador)!=null ){
+           this.nombreTrabajador=tbL.retornarTrabajador(idTrabajador).getNombre()+
+                " "+tbL.retornarTrabajador(idTrabajador).getApellido();
+           return true;
+        }else{
+           this.nombreTrabajador="El Trabajador no existe";
+           return false;
+        }
+     
+    
+    }
     public boolean guardarNovedades(int idTrabajador, String nombreTipoNovedad, int cantHoras, String fechaInicio, String fechaFin) throws SQLException {
         NovedadModelo novedadModelo = new NovedadModelo(idTrabajador, nombreTipoNovedad, cantHoras, fechaInicio, fechaFin);
         NovedadesMapeo novedadesMapeo = new NovedadesMapeo();
@@ -51,7 +66,18 @@ public class NovedadesLogica {
     
     public ArrayList<NovedadModelo> consultarNovedades(int idTrabajador) throws SQLException {
         NovedadesMapeo novedadesMapeo = new NovedadesMapeo();
+        TrabajadorLogica tbL=new TrabajadorLogica();
+       
         ArrayList<NovedadModelo> nvM = novedadesMapeo.consultarNovedadPorIdTrabajador(idTrabajador);
+        String nombreTrabajador=tbL.retornarTrabajador(idTrabajador).getNombre()+
+                " "+tbL.retornarTrabajador(idTrabajador).getApellido();
+        for (NovedadModelo i : nvM) {
+             i.setNombreTrabajador(nombreTrabajador);
+             System.out.println("sds ");
+        }
+       
+       
+        
         return nvM;
 
     }
