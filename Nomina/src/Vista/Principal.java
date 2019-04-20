@@ -7,6 +7,7 @@ package Vista;
 
 import Modelo.CargoMapeo;
 import Modelo.TrabajadorMapeo;
+import static Vista.EscritorioGestorNomina.esctiorioGestorNomina;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +18,8 @@ import javax.swing.JInternalFrame;
  * @author salas
  */
 public class Principal extends javax.swing.JFrame {
+
+    Vistas vista = new Vistas();
 
     /**
      * Creates new form Principal
@@ -47,6 +50,8 @@ public class Principal extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jBCrearNovedades = new javax.swing.JButton();
+        jBConsultarNovedades = new javax.swing.JButton();
         Escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -126,6 +131,30 @@ public class Principal extends javax.swing.JFrame {
         });
         jToolBar1.add(jButton5);
 
+        jBCrearNovedades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/add_page.png"))); // NOI18N
+        jBCrearNovedades.setText("Crear Novedad");
+        jBCrearNovedades.setFocusable(false);
+        jBCrearNovedades.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBCrearNovedades.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBCrearNovedades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCrearNovedadesActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jBCrearNovedades);
+
+        jBConsultarNovedades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/seo.png"))); // NOI18N
+        jBConsultarNovedades.setText("Consultar Novedad");
+        jBConsultarNovedades.setFocusable(false);
+        jBConsultarNovedades.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBConsultarNovedades.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBConsultarNovedades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBConsultarNovedadesActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jBConsultarNovedades);
+
         javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
@@ -134,7 +163,7 @@ public class Principal extends javax.swing.JFrame {
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 258, Short.MAX_VALUE)
+            .addGap(0, 482, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Registrar");
@@ -146,7 +175,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 712, Short.MAX_VALUE)
             .addComponent(Escritorio)
         );
         layout.setVerticalGroup(
@@ -215,6 +244,19 @@ public class Principal extends javax.swing.JFrame {
         Escritorio.add(interno);
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jBCrearNovedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCrearNovedadesActionPerformed
+        try {
+            Escritorio.add(vista.returnInternal(new JPanelRegistroNovedades(), "Registro de Novedades"));
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        esctiorioGestorNomina.selectFrame(true);
+    }//GEN-LAST:event_jBCrearNovedadesActionPerformed
+
+    private void jBConsultarNovedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConsultarNovedadesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBConsultarNovedadesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -257,6 +299,8 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane Escritorio;
+    private javax.swing.JButton jBConsultarNovedades;
+    private javax.swing.JButton jBCrearNovedades;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
