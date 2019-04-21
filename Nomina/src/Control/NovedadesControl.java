@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Alexandra
  */
 public class NovedadesControl {
-    NovedadesLogica nl;
+   NovedadesLogica nl;
    private int idtrabajador;
    private String nombreTrabajador;
    private int tipoNovedad;
@@ -26,6 +26,7 @@ public class NovedadesControl {
    private int idNovedades;
 
     public NovedadesControl() {
+         nl=new NovedadesLogica();
     }
    
    
@@ -118,30 +119,34 @@ public class NovedadesControl {
     public void setIdNovedades(int idNovedades) {
         this.idNovedades = idNovedades;
     }
-    
+    /**********
+     Para los metodos de ExisteTrabPorCedula y consultanombreTrabPorCedula
+     se requiere el mismo objeto de nl por lo que  en el constructor de Novedades
+     Control se inicializa.
+     **********/
     public boolean ExisteTrabPorCedula(int idTrabajador) throws SQLException{
-         NovedadesLogica nl=new NovedadesLogica();
+         
         return nl.consultarNombreTrabajador(idTrabajador);
     }
     public String consultanombreTrabPorCedula(int idTrabajador) throws SQLException{ 
-         NovedadesLogica nl=new NovedadesLogica();
-        System.out.println("traba "+ nl.getNombreTrabajador());
+       // System.out.println("traba "+ nl.getNombreTrabajador());
         return nl.getNombreTrabajador();
     }
+    //Las novedades se setean para no llamar el objeto NovedadModelo ya que la 
+    //arquitectura es en capas
     public void editarNovedades(int idNovedad, String nombreTipoNovedad,
-            int cantHoras, String fechaInicio, String fechaFin) throws SQLException{
+         int cantHoras, String fechaInicio, String fechaFin) throws SQLException{
+         NovedadesLogica nlogica=new NovedadesLogica();
          NovedadesLogica nl=new NovedadesLogica();
           // nl.editarNovedades(cantHoras, idNovedad);
-        
         nl.setIdtrabajador(getIdtrabajador());
         nl.setNombreTrabajador (getNombreNovedad());
-        nl.setTipoNovedad (getTipoNovedad());
-        nl.setNombreNovedad (getNombreNovedad());
-        nl.setCantidadHoras (getCantidadHoras());
-        nl.setFechaInicio(getFechaInicio());
-        nl.setFechaFin(getFechaFin());
-        nl.setIdNovedades(nl.getIdNovedades());
-        nl.editarNovedades(nl);
+        nl.setNombreNovedad (nombreTipoNovedad);
+        nl.setCantidadHoras (cantHoras);
+        nl.setFechaInicio(fechaInicio);
+        nl.setFechaFin(fechaFin);
+        nl.setIdNovedades(idNovedad);
+        nlogica.editarNovedades(nl);
     }
   
     public void guardarNovedades(int idTrabajador, String nombreTipoNovedad, int cantHoras, String fechaInicio, String fechaFin) throws SQLException{

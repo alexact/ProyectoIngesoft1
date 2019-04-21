@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
  */
 public class EdicionNovedades extends javax.swing.JPanel {
 
+    NovedadesControl nvC;
     Vistas vistas = new Vistas();
     DateFormat df = new SimpleDateFormat("dd/MM/YYYY");
     private int idNovedad;
@@ -30,8 +31,8 @@ public class EdicionNovedades extends javax.swing.JPanel {
 
     public EdicionNovedades(String idNovedad) throws SQLException, ParseException {
         initComponents();
-
-        NovedadesControl nvC = new NovedadesControl(Integer.parseInt(idNovedad));
+        this.idNovedad=Integer.parseInt(idNovedad);
+        nvC = new NovedadesControl(Integer.parseInt(idNovedad));
         for (int i = 0; i < nvC.tiposIncapacidad().size(); i++) {
             jCBoxTipoIncapacidad.addItem(nvC.tiposIncapacidad().get(i));
         }
@@ -73,7 +74,7 @@ public class EdicionNovedades extends javax.swing.JPanel {
                 case 10:
                     jDateClicenciaInicio.setDate(fechaParseadaInicio);
                     jDateCLicenciaFin.setDate(fechaParseadaFin);
-                break;
+                    break;
             }
         }
 
@@ -216,7 +217,7 @@ public class EdicionNovedades extends javax.swing.JPanel {
         jLabel10.setText("Hora extra días normales:");
 
         jBGuardarHExtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Save.png"))); // NOI18N
-        jBGuardarHExtras.setText("Cargar Horas Extras");
+        jBGuardarHExtras.setText("Editar Horas Extras");
         jBGuardarHExtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBGuardarHExtrasActionPerformed(evt);
@@ -238,39 +239,40 @@ public class EdicionNovedades extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel22)
                 .addGap(82, 82, 82))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextFHoraEDDOM, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextFHoraENDOM, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel9)
-                                        .addGap(83, 83, 83)
-                                        .addComponent(jDateCHENDInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jDateCHEDInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jDateCHENInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jDateCHEDDInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLTotalHoraExtras, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jBGuardarHExtras)
-                                .addGap(8, 8, 8))))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jTextFHoraENDOM, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLTotalHoraExtras, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jBGuardarHExtras)
+                                                .addGap(8, 8, 8))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(jDateCHENInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                                                .addComponent(jDateCHEDInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jDateCHEDDInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                                        .addComponent(jDateCHENDInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jTextFHoraEDDOM, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jLabel9))
+                                    .addComponent(jLabel8)))))
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
@@ -305,7 +307,7 @@ public class EdicionNovedades extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
                         .addComponent(jTextFHoraED, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jDateCHEDInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateCHEDInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -347,7 +349,7 @@ public class EdicionNovedades extends javax.swing.JPanel {
         jLabel12.setText("Seleccione el tipo de incapacidad");
 
         jBGuardarIncapacidad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Save.png"))); // NOI18N
-        jBGuardarIncapacidad.setText("Cargar Incapacidad");
+        jBGuardarIncapacidad.setText("Editar Incapacidad");
         jBGuardarIncapacidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBGuardarIncapacidadActionPerformed(evt);
@@ -418,7 +420,7 @@ public class EdicionNovedades extends javax.swing.JPanel {
         jLabel27.setText("Fin");
 
         jBGuardarILicencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Save.png"))); // NOI18N
-        jBGuardarILicencia.setText("Cargar Licencia");
+        jBGuardarILicencia.setText("Editar Licencia");
         jBGuardarILicencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBGuardarILicenciaActionPerformed(evt);
@@ -468,7 +470,7 @@ public class EdicionNovedades extends javax.swing.JPanel {
         jLabel16.setText("Recargo Dominical o Festivo");
 
         jButtonRecargoN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Save.png"))); // NOI18N
-        jButtonRecargoN.setText("Agregar Recargo Nocturno");
+        jButtonRecargoN.setText("Editar Recargo Nocturno");
         jButtonRecargoN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonRecargoNActionPerformed(evt);
@@ -476,7 +478,7 @@ public class EdicionNovedades extends javax.swing.JPanel {
         });
 
         jBRecargosDominical.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Save.png"))); // NOI18N
-        jBRecargosDominical.setText("Agregar Recargo Dominical");
+        jBRecargosDominical.setText("Editar Recargo Dominical");
         jBRecargosDominical.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBRecargosDominicalActionPerformed(evt);
@@ -515,21 +517,22 @@ public class EdicionNovedades extends javax.swing.JPanel {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                         .addComponent(jLabel30)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButtonRecargoN)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                            .addComponent(jDateChooserInicioRD, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel31)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jDateChooserFinRD, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                            .addComponent(jDateChooserInicioRN, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jLabel29)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jDateChooserFinRN, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jDateChooserInicioRD, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel31)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jDateChooserFinRD, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jDateChooserInicioRN, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel29)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jDateChooserFinRN, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                        .addGap(25, 25, 25)
+                                        .addComponent(jButtonRecargoN))))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(78, 78, 78)
                         .addComponent(jBRecargosDominical)))
@@ -676,7 +679,7 @@ public class EdicionNovedades extends javax.swing.JPanel {
         if (JTFIDtrabajador.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(this, "Debe digitar la identificación del trabajador");
         } else {
-            NovedadesControl nl;
+            NovedadesControl nC;
             idtraba = Integer.parseInt(JTFIDtrabajador.getText());
             int horas = Integer.parseInt((jTextFHoraED.getText().trim().isEmpty()) ? "0" : jTextFHoraED.getText());
             String fechaInicio = null;
@@ -687,9 +690,9 @@ public class EdicionNovedades extends javax.swing.JPanel {
                     fechaInicio = df.format(jDateCHEDInicio.getDate());
                     fechaFin = df.format(jDateCHEDInicio.getDate());
                     try {
-                        nl = new NovedadesControl();
-                        nl.editarNovedades(idNovedad,"Hora extra Diurna", horas, fechaInicio, fechaFin);
-                        
+                        nvC = new NovedadesControl();
+                        nvC.editarNovedades(idNovedad, "Hora extra Diurna", horas, fechaInicio, fechaFin);
+
                         JOptionPane.showMessageDialog(this, "Se guardó con éxito las " + horas + " horas extras Diurnas");
                         jTextFHoraED.setText(null);
                     } catch (SQLException ex) {
@@ -706,8 +709,8 @@ public class EdicionNovedades extends javax.swing.JPanel {
                     fechaInicio = df.format(jDateCHENInicio.getDate());
                     fechaFin = df.format(jDateCHENInicio.getDate());
                     try {
-                        nl = new NovedadesControl();
-                        nl.editarNovedades(idNovedad, "Hora extra Nocturna", horas, fechaInicio, fechaFin);
+                        nvC = new NovedadesControl();
+                        nvC.editarNovedades(idNovedad, "Hora extra Nocturna", horas, fechaInicio, fechaFin);
                         JOptionPane.showMessageDialog(this, "Se guardó con éxito las " + horas + " horas extras Nocturnas");
                         jTextFHoraEN.setText(null);
                     } catch (SQLException ex) {
@@ -725,8 +728,8 @@ public class EdicionNovedades extends javax.swing.JPanel {
                     fechaFin = df.format(jDateCHEDDInicio.getDate());
                     //df.format(jDateCHEDDInicio.getDate().getTime()+(86400000*7));
                     try {
-                        nl = new NovedadesControl();
-                        nl.editarNovedades(idNovedad,"HoraE Dominical/F Diurna", horas, fechaInicio, fechaFin);
+                        nvC = new NovedadesControl();
+                        nvC.editarNovedades(idNovedad, "HoraE Dominical/F Diurna", horas, fechaInicio, fechaFin);
                         JOptionPane.showMessageDialog(this, "Se guardó con éxito las " + horas + " horas extras Dominical/F Diurna");
                         jTextFHoraEDDOM.setText(null);
                     } catch (SQLException ex) {
@@ -743,8 +746,8 @@ public class EdicionNovedades extends javax.swing.JPanel {
                     fechaInicio = df.format(jDateCHENDInicio.getDate());
                     fechaFin = df.format(jDateCHENDInicio.getDate());
                     try {
-                        nl = new NovedadesControl();
-                        nl.editarNovedades(idNovedad,"HorE Dominical/F Nocturna", horas, fechaInicio, fechaFin);
+                        nvC = new NovedadesControl();
+                        nvC.editarNovedades(idNovedad, "HorE Dominical/F Nocturna", horas, fechaInicio, fechaFin);
                         JOptionPane.showMessageDialog(this, "Se guardó con éxito las " + horas + " horas extras Dominical/F Nocturna");
                         jTextFHoraENDOM.setText(null);
                     } catch (SQLException ex) {
@@ -775,7 +778,7 @@ public class EdicionNovedades extends javax.swing.JPanel {
 
                 try {
                     NovedadesControl nl = new NovedadesControl();
-                    nl.editarNovedades(idNovedad,"Recargo Nocturno", cantDias,
+                    nl.editarNovedades(idNovedad, "Recargo Nocturno", cantDias,
                             df.format(jDateChooserInicioRN.getDate()), df.format(jDateChooserFinRN.getDate()));
                 } catch (SQLException ex1) {
                     Logger.getLogger(EdicionNovedades.class.getName()).log(Level.SEVERE, null, ex1);
@@ -804,7 +807,7 @@ public class EdicionNovedades extends javax.swing.JPanel {
 
                 try {
                     NovedadesControl nl = new NovedadesControl();
-                    nl.editarNovedades(idNovedad,"Recargo Dominical o Festivo", cantDias,
+                    nl.editarNovedades(idNovedad, "Recargo Dominical o Festivo", cantDias,
                             df.format(jDateChooserInicioRD.getDate()), df.format(jDateChooserFinRD.getDate()));
                 } catch (SQLException ex) {
                     Logger.getLogger(EdicionNovedades.class.getName()).log(Level.SEVERE, null, ex);
@@ -898,7 +901,7 @@ public class EdicionNovedades extends javax.swing.JPanel {
                     try {
 
                         NovedadesControl nl = new NovedadesControl();
-                        nl.editarNovedades(idNovedad,tipoIncapacidad, (cantDias * 8),
+                        nl.editarNovedades(idNovedad, tipoIncapacidad, (cantDias * 8),
                                 df.format(jDateCInicioIncapacidad.getDate()), df.format(jDateCLlegadaIncapacidad.getDate()));
                         JOptionPane.showMessageDialog(this, "Se guardó con éxito las incapacidad");
                     } catch (SQLException ex) {
@@ -926,7 +929,7 @@ public class EdicionNovedades extends javax.swing.JPanel {
     private void jBGuardarILicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarILicenciaActionPerformed
         String itemSeleecionado = (String) jCBoxTipoIncapacidad.getSelectedItem();
         if (!JTFIDtrabajador.getText().trim().equals("")) {
-           if (jDateClicenciaInicio.getDate() == null && jDateCLicenciaFin.getDate() == null) {
+            if (jDateClicenciaInicio.getDate() == null && jDateCLicenciaFin.getDate() == null) {
                 JOptionPane.showMessageDialog(this, "Debe rellenar los campos obligatorios para guardar una licencia");
             } else {
                 try {
@@ -938,7 +941,7 @@ public class EdicionNovedades extends javax.swing.JPanel {
                         try {
 
                             NovedadesControl nl = new NovedadesControl();
-                            nl.editarNovedades(idNovedad,"Licencia", (cantDias),
+                            nl.editarNovedades(idNovedad, "Licencia", (cantDias),
                                     df.format(jDateClicenciaInicio.getDate()), df.format(jDateCLicenciaFin.getDate()));
                             JOptionPane.showMessageDialog(this, "Se guardó con éxito las Licencia");
                         } catch (SQLException ex) {

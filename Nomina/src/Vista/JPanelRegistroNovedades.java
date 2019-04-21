@@ -298,7 +298,7 @@ public class JPanelRegistroNovedades extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 123, -1, -1));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
         jPanelIncapacidad.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro de incapacidad"));
 
@@ -369,7 +369,7 @@ public class JPanelRegistroNovedades extends javax.swing.JPanel {
                         .addGap(0, 11, Short.MAX_VALUE))))
         );
 
-        add(jPanelIncapacidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 418, 525, -1));
+        add(jPanelIncapacidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 525, -1));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Licencias no remuneradas"));
 
@@ -419,7 +419,7 @@ public class JPanelRegistroNovedades extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(549, 429, 402, -1));
+        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 450, 402, -1));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Recargos "));
 
@@ -523,7 +523,7 @@ public class JPanelRegistroNovedades extends javax.swing.JPanel {
                 .addGap(342, 342, 342))
         );
 
-        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(549, 123, -1, 288));
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 140, -1, 288));
 
         jBConsultarNovedades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/seo.png"))); // NOI18N
         jBConsultarNovedades.setText("Consultar Novedades");
@@ -725,7 +725,8 @@ public class JPanelRegistroNovedades extends javax.swing.JPanel {
             try {
                 if (jDateChooserInicioRN.getDate() != null && jDateChooserFinRN.getDate() != null) {
 
-                    cantDias = Integer.parseInt(df.format(jDateCHEDDInicio.getDate().getTime() / (86400000 * 7)));
+                    cantDias = (int) (jDateChooserFinRN.getDate().getTime()
+                            - jDateChooserInicioRN.getDate().getTime()) / (86400000);
                 }
 
                 try {

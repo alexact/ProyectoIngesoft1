@@ -11,6 +11,7 @@ import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,6 +33,7 @@ public class ConsultaNovedadesVista extends javax.swing.JPanel {
             JTFIDtrabajador.setText(idtrabajador);
             NovedadesControl nvC = new NovedadesControl();
             jTableNovedades.setModel(nvC.listaNovedades(this.idtrabajador));
+           
 
         }
     }
@@ -70,6 +72,7 @@ public class ConsultaNovedadesVista extends javax.swing.JPanel {
 
             }
         ));
+        jTableNovedades.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jTableNovedades);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(72, 215, 520, 320));
@@ -184,6 +187,7 @@ public class ConsultaNovedadesVista extends javax.swing.JPanel {
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
         System.out.println(jTableNovedades.getSelectedRow());
+        
         DefaultTableModel tm = (DefaultTableModel) jTableNovedades.getModel();
         int idNovedad = Integer.parseInt(String.valueOf(tm.getValueAt(jTableNovedades.getSelectedRow(), 0)));
         NovedadesControl nvC = new NovedadesControl();

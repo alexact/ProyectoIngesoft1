@@ -103,14 +103,14 @@ public class NovedadesLogica {
     public boolean consultarNombreTrabajador(int idTrabajador) throws SQLException {
         TrabajadorLogica tbL = new TrabajadorLogica();
         boolean nombreTrabajador;
-        System.out.println("nuluto " + tbL.retornarTrabajador(idTrabajador));
+        System.out.println("nuluto " + tbL.retornarTrabajador(idTrabajador).getNombre());
         if (tbL.retornarTrabajador(idTrabajador).getNombre() != null
                 || tbL.retornarTrabajador(idTrabajador).getApellido() != null) {
-            this.nombreTrabajador = tbL.retornarTrabajador(idTrabajador).getNombre()
-                    + " " + tbL.retornarTrabajador(idTrabajador).getApellido();
+            setNombreTrabajador (tbL.retornarTrabajador(idTrabajador).getNombre()
+                    + " " + tbL.retornarTrabajador(idTrabajador).getApellido());
             return true;
         } else {
-            this.nombreTrabajador = "El Trabajador no existe";
+             setNombreTrabajador("El Trabajador no existe");
             return false;
         }
 
@@ -125,13 +125,12 @@ public class NovedadesLogica {
     }
 
     public NovedadModelo editarNovedades(NovedadesLogica nL) throws SQLException {
-        NovedadModelo novedadModelo;
-        novedadModelo = consultarNovedadesPorID(nL.getIdNovedades());
-        novedadModelo.setTipoNovedad (nL.getTipoNovedad());
-        novedadModelo.setNombreNovedad (nL.getNombreNovedad());
-        novedadModelo.setCantidadHoras (nL.getCantidadHoras());
+        System.out.println("Fechas "+nL.getFechaInicio());
+        NovedadModelo novedadModelo = consultarNovedadesPorID(nL.getIdNovedades());
+        novedadModelo.setNombreNovedad(nL.getNombreNovedad());
+        novedadModelo.setCantidadHoras(nL.getCantidadHoras());
         novedadModelo.setFechaInicio(nL.getFechaInicio());
-        novedadModelo.setFechaFin(getFechaFin());
+        novedadModelo.setFechaFin(nL.getFechaInicio());
         NovedadesMapeo novedadesMapeo = new NovedadesMapeo();
         novedadesMapeo.update(novedadModelo);
         return novedadModelo;
@@ -187,12 +186,16 @@ public class NovedadesLogica {
             @Override
             public boolean isCellEditable(int filas, int columnas) {
 
-                if (columnas != 2) {
+                if (columnas >=0) {
                     return false;
                 }
                 return true;
             }
+
+            
+          
         };
+        
         tablaNovedades.addColumn("No.");
         tablaNovedades.addColumn("Tipo de Novedad");
         tablaNovedades.addColumn("Horas");

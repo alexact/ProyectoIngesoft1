@@ -28,13 +28,15 @@ public class NovedadesMapeo {
         conexion.transaccion(sql);
         conexion.cerrar();
     }
-    public void update(NovedadModelo novedadModelo){
+    public void update(NovedadModelo novedadModelo) throws SQLException{
         Conexion conexion=new Conexion();
         String sql="UPDATE novedades set CANT_HORAS="+novedadModelo.getCantidadHoras()+",FECHA_INICIO="
                 +"to_date('"+novedadModelo.getFechaInicio()+ "','DD/MM/YYYY')"
                 + ",FECHA_FIN="+"to_date('" +novedadModelo.getFechaFin()+ "','DD/MM/YYYY')"
+                +",IDTIPO_NOVEDAD="+tipoNovedadMapeo.consultarIDTipoNovedad(novedadModelo.getNombreNovedad())
                 +"where id_novedades= "+ novedadModelo.getIdNovedades();
         conexion.transaccion(sql);
+        System.out.println("UPDATE "+ sql);
         conexion.cerrar();
     }
     
