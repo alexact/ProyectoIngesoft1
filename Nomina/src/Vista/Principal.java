@@ -7,7 +7,6 @@ package Vista;
 
 import Modelo.CargoMapeo;
 import Modelo.TrabajadorMapeo;
-import static Vista.EscritorioGestorNomina.esctiorioGestorNomina;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -250,11 +249,18 @@ public class Principal extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        esctiorioGestorNomina.selectFrame(true);
+        Escritorio.selectFrame(true);
     }//GEN-LAST:event_jBCrearNovedadesActionPerformed
 
     private void jBConsultarNovedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConsultarNovedadesActionPerformed
-        // TODO add your handling code here:
+        try {
+            Escritorio.add(vista.returnInternal(new ConsultaNovedadesVista(null), "Consulta de novedades"));
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+         Escritorio.selectFrame(true);
     }//GEN-LAST:event_jBConsultarNovedadesActionPerformed
 
     /**

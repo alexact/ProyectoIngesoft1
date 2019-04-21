@@ -17,30 +17,105 @@ import javax.swing.table.DefaultTableModel;
  * @author Alexandra
  */
 public class NovedadesLogica {
-    String nombreTrabajador;
-    
-    public NovedadesLogica() {
-        
+
+    private int idtrabajador;
+    private String nombreTrabajador;
+    private int tipoNovedad;
+    private String nombreNovedad;
+    private int cantidadHoras;
+    private String fechaInicio;
+    private String fechaFin;
+    private int idNovedades;
+
+    public int getIdtrabajador() {
+        return idtrabajador;
     }
-    public void eliminarNovedad(int idNovedad){
-        NovedadesMapeo novedadM=new NovedadesMapeo();
+
+    public void setIdtrabajador(int idtrabajador) {
+        this.idtrabajador = idtrabajador;
+    }
+
+    public int getTipoNovedad() {
+        return tipoNovedad;
+    }
+
+    public void setTipoNovedad(int tipoNovedad) {
+        this.tipoNovedad = tipoNovedad;
+    }
+
+    public String getNombreNovedad() {
+        return nombreNovedad;
+    }
+
+    public void setNombreNovedad(String nombreNovedad) {
+        this.nombreNovedad = nombreNovedad;
+    }
+
+    public int getCantidadHoras() {
+        return cantidadHoras;
+    }
+
+    public void setCantidadHoras(int cantidadHoras) {
+        this.cantidadHoras = cantidadHoras;
+    }
+
+    public String getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(String fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public String getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(String fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public int getIdNovedades() {
+        return idNovedades;
+    }
+
+    public void setIdNovedades(int idNovedades) {
+        this.idNovedades = idNovedades;
+    }
+
+    public NovedadesLogica() {
+
+    }
+
+    public String getNombreTrabajador() {
+        return nombreTrabajador;
+    }
+
+    public void setNombreTrabajador(String nombreTrabajador) {
+        this.nombreTrabajador = nombreTrabajador;
+    }
+
+    public void eliminarNovedad(int idNovedad) {
+        NovedadesMapeo novedadM = new NovedadesMapeo();
         novedadM.delete(idNovedad);
     }
 
-     public boolean consultarNombreTrabajador(int idTrabajador){
-        TrabajadorLogica tbL=new TrabajadorLogica();
-         boolean nombreTrabajador;
-        if(tbL.retornarTrabajador(idTrabajador)!=null ){
-           this.nombreTrabajador=tbL.retornarTrabajador(idTrabajador).getNombre()+
-                " "+tbL.retornarTrabajador(idTrabajador).getApellido();
-           return true;
-        }else{
-           this.nombreTrabajador="El Trabajador no existe";
-           return false;
+    public boolean consultarNombreTrabajador(int idTrabajador) throws SQLException {
+        TrabajadorLogica tbL = new TrabajadorLogica();
+        boolean nombreTrabajador;
+        System.out.println("nuluto " + tbL.retornarTrabajador(idTrabajador));
+        if (tbL.retornarTrabajador(idTrabajador).getNombre() != null
+                || tbL.retornarTrabajador(idTrabajador).getApellido() != null) {
+            this.nombreTrabajador = tbL.retornarTrabajador(idTrabajador).getNombre()
+                    + " " + tbL.retornarTrabajador(idTrabajador).getApellido();
+            return true;
+        } else {
+            this.nombreTrabajador = "El Trabajador no existe";
+            return false;
         }
-     
-    
+
     }
+
     public boolean guardarNovedades(int idTrabajador, String nombreTipoNovedad, int cantHoras, String fechaInicio, String fechaFin) throws SQLException {
         NovedadModelo novedadModelo = new NovedadModelo(idTrabajador, nombreTipoNovedad, cantHoras, fechaInicio, fechaFin);
         NovedadesMapeo novedadesMapeo = new NovedadesMapeo();
@@ -48,46 +123,58 @@ public class NovedadesLogica {
         return resp;
 
     }
-    public NovedadModelo editarNovedades( int cantHoras,int idNovedad) throws SQLException{
+
+    public NovedadModelo editarNovedades(NovedadesLogica nL) throws SQLException {
         NovedadModelo novedadModelo;
-        novedadModelo=consultarNovedadesPorID(idNovedad);
-        novedadModelo.setCantidadHoras(cantHoras);
+        novedadModelo = consultarNovedadesPorID(nL.getIdNovedades());
+        novedadModelo.setTipoNovedad (nL.getTipoNovedad());
+        novedadModelo.setNombreNovedad (nL.getNombreNovedad());
+        novedadModelo.setCantidadHoras (nL.getCantidadHoras());
+        novedadModelo.setFechaInicio(nL.getFechaInicio());
+        novedadModelo.setFechaFin(getFechaFin());
         NovedadesMapeo novedadesMapeo = new NovedadesMapeo();
         novedadesMapeo.update(novedadModelo);
         return novedadModelo;
-    
+
     }
+
     public NovedadModelo consultarNovedadesPorID(int idNovedad) throws SQLException {
         NovedadesMapeo novedadesMapeo = new NovedadesMapeo();
         NovedadModelo nvM = novedadesMapeo.consultarNovedadPorIdNovedad(idNovedad);
+        setIdtrabajador(nvM.getIdtrabajador());
+        setNombreTrabajador (nvM.getNombreNovedad());
+        setTipoNovedad (nvM.getTipoNovedad());
+        setNombreNovedad (nvM.getNombreNovedad());
+        setCantidadHoras (nvM.getCantidadHoras());
+        setFechaInicio(nvM.getFechaInicio());
+        setFechaFin(nvM.getFechaFin());
+        setIdNovedades(nvM.getIdNovedades());
         return nvM;
 
     }
-    
+
     public ArrayList<NovedadModelo> consultarNovedades(int idTrabajador) throws SQLException {
         NovedadesMapeo novedadesMapeo = new NovedadesMapeo();
-        TrabajadorLogica tbL=new TrabajadorLogica();
-       
+        TrabajadorLogica tbL = new TrabajadorLogica();
+
         ArrayList<NovedadModelo> nvM = novedadesMapeo.consultarNovedadPorIdTrabajador(idTrabajador);
-        String nombreTrabajador=tbL.retornarTrabajador(idTrabajador).getNombre()+
-                " "+tbL.retornarTrabajador(idTrabajador).getApellido();
+        String nombreTrabajador = tbL.retornarTrabajador(idTrabajador).getNombre()
+                + " " + tbL.retornarTrabajador(idTrabajador).getApellido();
         for (NovedadModelo i : nvM) {
-             i.setNombreTrabajador(nombreTrabajador);
-             System.out.println("sds ");
+            i.setNombreTrabajador(nombreTrabajador);
+            System.out.println("sds ");
         }
-       
-       
-        
+
         return nvM;
 
     }
-    
-    public ArrayList<String> consultarTiposDeNovedad(String simbolo) throws SQLException{
-        if(simbolo.equals("A")){
-            TipoNovedadMapeo tNM=new TipoNovedadMapeo();
+
+    public ArrayList<String> consultarTiposDeNovedad(String simbolo) throws SQLException {
+        if (simbolo.equals("A")) {
+            TipoNovedadMapeo tNM = new TipoNovedadMapeo();
             return tNM.consultarTiposDeNovedad();
-        }else{
-            TipoNovedadMapeo tNM=new TipoNovedadMapeo();
+        } else {
+            TipoNovedadMapeo tNM = new TipoNovedadMapeo();
             return tNM.consultarPorTiposDeNovedad(simbolo);
         }
     }
@@ -100,7 +187,7 @@ public class NovedadesLogica {
             @Override
             public boolean isCellEditable(int filas, int columnas) {
 
-                if (columnas!= 2 ) {
+                if (columnas != 2) {
                     return false;
                 }
                 return true;
@@ -124,6 +211,5 @@ public class NovedadesLogica {
         }
         return tablaNovedades;
     }
-    
 
 }
