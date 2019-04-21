@@ -10,9 +10,11 @@ import Control.PanelTrabajadorControl;
 import Control.TrabajadorControl;
 import Logica.TrabajadorLogica;
 import static Vista.PanelCargoTrabajador.cod;
+import static Vista.Principal.Escritorio;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -51,7 +53,7 @@ public class PanelActualizarTrabajador extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jtxCelular = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jtxCedula = new javax.swing.JTextField();
+        jtxCedulaA = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jtxFpension = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -60,6 +62,7 @@ public class PanelActualizarTrabajador extends javax.swing.JPanel {
         jtxArl = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jCalendar1 = new com.toedter.calendar.JCalendar();
@@ -125,9 +128,9 @@ public class PanelActualizarTrabajador extends javax.swing.JPanel {
 
         jLabel6.setText("Cedula");
 
-        jtxCedula.addActionListener(new java.awt.event.ActionListener() {
+        jtxCedulaA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxCedulaActionPerformed(evt);
+                jtxCedulaAActionPerformed(evt);
             }
         });
 
@@ -164,6 +167,13 @@ public class PanelActualizarTrabajador extends javax.swing.JPanel {
             }
         });
 
+        jButton2.setText("Cargo");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -196,33 +206,35 @@ public class PanelActualizarTrabajador extends javax.swing.JPanel {
                                     .addComponent(jtxDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jtxFcesantias, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jtxCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel12)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jtxFpension, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jtxFcesantias, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jtxCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jtxArl, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(jtxCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jtxFpension, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jtxCedulaA, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jtxArl, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -251,7 +263,7 @@ public class PanelActualizarTrabajador extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jtxCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtxCedulaA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -268,7 +280,9 @@ public class PanelActualizarTrabajador extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jLabel10.setText("Fecha de nacimiento");
@@ -292,8 +306,8 @@ public class PanelActualizarTrabajador extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/refresh.png"))); // NOI18N
@@ -344,13 +358,14 @@ public class PanelActualizarTrabajador extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11)
-                            .addComponent(jtxCedula2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jtxCedula2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jToggleButton1)
                     .addComponent(jButton1))
@@ -369,16 +384,16 @@ public class PanelActualizarTrabajador extends javax.swing.JPanel {
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
 
-        if (!cpt.aseguramientoDatos(jtxCedula.getText(), jtxNombre.getText(), jtxApellido.getText(), jtxDireccion.getText(), jtxTelefono.getText(), jtxCelular.getText(),
+        if (!cpt.aseguramientoDatos(jtxCedulaA.getText(), jtxNombre.getText(), jtxApellido.getText(), jtxDireccion.getText(), jtxTelefono.getText(), jtxCelular.getText(),
                 jtxFpension.getText(), jtxFcesantias.getText(), jtxFpension.getText(), jtxArl.getText())) {
             try {
-                if (!cpt.verificarTrabajador(jtxCedula.getText(), jtxNombre.getText(), jtxApellido.getText(), jCalendar1.getDate(), jtxDireccion.getText(), jtxTelefono.getText(), jtxCelular.getText(), jtxArl.getText(), jtxFpension.getText(), jtxFcesantias.getText(), "Bien", cargoC.getCargo(cod), trabajadorC.ControlconvertirenTrueOfalse(jComboBox1.getSelectedIndex()))) {
+                if (!cpt.verificarTrabajador(jtxCedulaA.getText(), jtxNombre.getText(), jtxApellido.getText(), jCalendar1.getDate(), jtxDireccion.getText(), jtxTelefono.getText(), jtxCelular.getText(), jtxArl.getText(), jtxFpension.getText(), jtxFcesantias.getText(), "Bien", cargoC.getCargo(cod), trabajadorC.ControlconvertirenTrueOfalse(jComboBox1.getSelectedIndex()))) {
                     JOptionPane.showMessageDialog(this, "Trabajador No  Existe");
                 } else {
-                    trabajadorL.actualizarTrabajadorB(Long.parseLong(jtxCedula.getText()), jtxNombre.getText(), jtxApellido.getText(), jCalendar1.getDate(), jtxDireccion.getText(), Integer.parseInt(jtxTelefono.getText()), Long.parseLong(jtxCelular.getText()), jtxArl.getText(), jtxFpension.getText(), jtxFcesantias.getText(), "Bien",cargoC.getCargo(cod), trabajadorC.ControlconvertirenTrueOfalse(jComboBox1.getSelectedIndex()));
+                    trabajadorC.actualizarTrabajadorBC(Long.parseLong(jtxCedulaA.getText()), jtxNombre.getText(), jtxApellido.getText(), jCalendar1.getDate(), jtxDireccion.getText(), Integer.parseInt(jtxTelefono.getText()), Long.parseLong(jtxCelular.getText()), jtxArl.getText(), jtxFpension.getText(), jtxFcesantias.getText(), "Bien", cargoC.getCargo(cod), trabajadorC.ControlconvertirenTrueOfalse(jComboBox1.getSelectedIndex()));
                     JOptionPane.showMessageDialog(this, "Trabajador Agregado Existosamente");
-                    cpt.setText(jtxNombre, jtxApellido, jtxDireccion, jtxTelefono, jtxCelular, jtxArl, jtxCedula, jtxFpension, jtxFcesantias);
-                    
+                    cpt.setText(jtxNombre, jtxApellido, jtxDireccion, jtxTelefono, jtxCelular, jtxArl, jtxCedulaA, jtxFpension, jtxFcesantias);
+
                 }
 
             } catch (NumberFormatException e) {
@@ -405,9 +420,9 @@ public class PanelActualizarTrabajador extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxCelularActionPerformed
 
-    private void jtxCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxCedulaActionPerformed
+    private void jtxCedulaAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxCedulaAActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxCedulaActionPerformed
+    }//GEN-LAST:event_jtxCedulaAActionPerformed
 
     private void jtxFpensionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxFpensionActionPerformed
         // TODO add your handling code here:
@@ -424,7 +439,7 @@ public class PanelActualizarTrabajador extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if (!jtxCedula2.getText().isEmpty()) {
-            cpt.setTextLleno(jtxNombre, jtxApellido, jtxDireccion, jtxTelefono, jtxCelular, jtxArl, jtxCedula, jtxFpension, jtxFcesantias, trabajadorC.retornarTrabajador(Long.parseLong(jtxCedula2.getText())));
+            cpt.setTextLleno(jtxNombre, jtxApellido, jtxDireccion, jtxTelefono, jtxCelular, jtxArl, jtxCedulaA, jtxFpension, jtxFcesantias, trabajadorC.retornarTrabajador(Long.parseLong(jtxCedula2.getText())));
 
         } else {
             JOptionPane.showMessageDialog(this, "Aun no ingresas la cedula");
@@ -435,9 +450,26 @@ public class PanelActualizarTrabajador extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        jTable1.setModel(cargoC.listarCargosC());
+        jTable1.setVisible(true);
+        JInternalFrame interno = new JInternalFrame("Asignar Cargo");
+        interno.add(panelct);
+        interno.setVisible(true);
+        interno.pack();
+        interno.setClosable(true);
+        Escritorio.add(interno);
+        Escritorio.revalidate();
+        Escritorio.repaint();
+        Escritorio.selectFrame(true);
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
@@ -459,8 +491,8 @@ public class PanelActualizarTrabajador extends javax.swing.JPanel {
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTextField jtxApellido;
     private javax.swing.JTextField jtxArl;
-    private javax.swing.JTextField jtxCedula;
     private javax.swing.JTextField jtxCedula2;
+    public static javax.swing.JTextField jtxCedulaA;
     private javax.swing.JTextField jtxCelular;
     private javax.swing.JTextField jtxDireccion;
     private javax.swing.JTextField jtxFcesantias;
@@ -473,5 +505,5 @@ public class PanelActualizarTrabajador extends javax.swing.JPanel {
     TrabajadorControl trabajadorC = new TrabajadorControl();
     TrabajadorLogica trabajadorL = new TrabajadorLogica();
     CargoControl cargoC = new CargoControl();
-
+    PanelCargoTrabajador panelct = new PanelCargoTrabajador();
 }

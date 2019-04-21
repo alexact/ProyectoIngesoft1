@@ -10,7 +10,7 @@ import Control.TrabajadorControl;
 import static Modelo.Trabajador.LISTATRABAJADORES;
 import javax.swing.JOptionPane;
 import static Vista.PanelTrabajador.jtxCedula;
-
+import static Vista.PanelActualizarTrabajador.jtxCedulaA;
 
 /**
  *
@@ -107,13 +107,19 @@ public class PanelCargoTrabajador extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
-        if (jTable1.getRowSelectionAllowed() && !jtxCedula.getText().isEmpty()) {
+        if (jTable1.getRowSelectionAllowed() && jtxCedula == null || !jtxCedulaA.getText().isEmpty()) {
+            trabajadorC.añadirCargo(Long.parseLong(jtxCedulaA.getText()), LISTATRABAJADORES, cargoC.getCargo(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString())));
+            //System.out.println(jTable1.getSelectedRow());
+            cod = Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
+            //System.out.println(cod);
+            JOptionPane.showMessageDialog(this, "Agregado Exitosamente");
+
+        } else if (jTable1.getRowSelectionAllowed() && jtxCedulaA == null || !jtxCedula.getText().isEmpty()) {
             trabajadorC.añadirCargo(Long.parseLong(jtxCedula.getText()), LISTATRABAJADORES, cargoC.getCargo(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString())));
             //System.out.println(jTable1.getSelectedRow());
             cod = Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
             //System.out.println(cod);
             JOptionPane.showMessageDialog(this, "Agregado Exitosamente");
-            
         } else {
             JOptionPane.showMessageDialog(this, "Falta Un Valor Por Llenar");
         }

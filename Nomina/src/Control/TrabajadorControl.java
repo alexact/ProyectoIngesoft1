@@ -63,6 +63,9 @@ public class TrabajadorControl {
     public Trabajador retornarTrabajador(long cadula){
         return trabajadorL.retornarTrabajador(cadula);
     }
+    public void actualizarTrabajadorBC(long identificacion, String nombre, String apellido, Date fechaN, String direccion, int telefono, long celular, String fPension, String fSesantias, String arl, String estado, Cargo cargo, boolean esCapacitador) throws SQLException {
+        trabajadorL.actualizarTrabajadorB(identificacion, nombre, apellido, fechaN, direccion, telefono, celular, fPension, fSesantias, arl, estado, cargo, esCapacitador);
+    }
 
 
     /*
