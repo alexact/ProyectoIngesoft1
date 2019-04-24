@@ -21,6 +21,7 @@ public class NovedadModelo {
    private String fechaInicio;
    private String fechaFin;
    private int idNovedades;
+   
 
     public NovedadModelo() {
     }

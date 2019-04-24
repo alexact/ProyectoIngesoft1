@@ -24,6 +24,7 @@ public class InterfazConsultarCursos extends javax.swing.JPanel {
         initComponents();
         this.escritorio = escritorio;
         this.control = control;
+        System.out.println("fdsg");
         listaCursos.setModel(control.listarCursos());
     }
 

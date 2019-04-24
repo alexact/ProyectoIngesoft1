@@ -112,7 +112,7 @@ public class TrabajadorLogica {
     }
 
     public Trabajador retornarTrabajador(long identificacion) {
-        Trabajador t = new Trabajador();
+        Trabajador t = null;
         for (int i = 0; i < LISTATRABAJADORES.size(); i++) {
             trabajador = LISTATRABAJADORES.get(i);
             if (identificacion == trabajador.getIdentificacion()) {

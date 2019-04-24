@@ -10,7 +10,7 @@ import Control.PanelTrabajadorControl;
 import Control.TrabajadorControl;
 import Logica.TrabajadorLogica;
 import static Vista.PanelCargoTrabajador.cod;
-import static Vista.Principal.Escritorio;
+import static Vista.EscritorioGestorNomina.Escritorio;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

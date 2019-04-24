@@ -7,6 +7,7 @@
 package Control;
 
 import Logica.LogicaArrayListCursos;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,7 +19,7 @@ public class ControlCursos {
     
     LogicaArrayListCursos arr;
 
-    public ControlCursos() {
+    public ControlCursos() throws SQLException {
          arr = new LogicaArrayListCursos();
     }
     
@@ -30,16 +31,17 @@ public class ControlCursos {
         this.arr = arr;
     }
     
-    public void agregarCurso(String nombre, String descripcion){
+    public void agregarCurso(String nombre, String descripcion) throws SQLException{
         arr.agregarCurso(nombre, descripcion);
     }
     
-    public void modificarCurso(String cod, String nombre, String descripcion, String estado, String capacitador){
+    public void modificarCurso(String cod, String nombre, String descripcion, int estado, int capacitador) throws SQLException{
         int codigo = Integer.parseInt(cod);
         arr.modificarCurso(codigo, nombre, descripcion, estado, capacitador);
     }
     
     public DefaultTableModel listarCursos(){
+        
         return arr.listarCursos();
     }
     

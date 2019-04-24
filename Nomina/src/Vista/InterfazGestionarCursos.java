@@ -7,6 +7,7 @@
 package Interfaz;
 
 import Control.ControlCursos;
+import java.sql.SQLException;
 import javax.swing.JDesktopPane;
 
 /**
@@ -22,7 +23,7 @@ public class InterfazGestionarCursos extends javax.swing.JPanel {
     /**
      * Creates new form VistaCrearCurso
      */
-    public InterfazGestionarCursos(JDesktopPane escritorio) {
+    public InterfazGestionarCursos(JDesktopPane escritorio) throws SQLException {
         initComponents();
         this.escritorio = escritorio;
         control = new ControlCursos();
@@ -129,7 +130,7 @@ public class InterfazGestionarCursos extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        escritorio.add(InterfazGestionPanel.returnInternal(new InterfazConsultarCursos(escritorio, interfazCursos.getControl()), "Consulta de Cursos"));
+        escritorio.add(InterfazGestionPanel.returnInternal(new InterfazConsultarCursos(escritorio, control), "Consulta de Cursos"));
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

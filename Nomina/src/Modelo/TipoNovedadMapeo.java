@@ -66,5 +66,34 @@ public class TipoNovedadMapeo {
            resultados.close();
         return tipoNovedades;
     }
+    public TipoNovedadModelo consultarTodoTipoNovedad(int idTipoNovedad) throws SQLException{
+        TipoNovedadModelo tipoNovedad=null;
+        String sql="SELECT * from TIPO_NOVEDAD where id_tiponovedad="+idTipoNovedad;
+         Conexion conexion=new Conexion();
+            ResultSet resultados = conexion.consulta(sql);
+            while (resultados.next()) {
+               tipoNovedad=new TipoNovedadModelo(resultados.getString("nombre_novedad"),
+               resultados.getInt("id_tiponovedad"), resultados.getInt("id_concepto"), 
+                       resultados.getDouble("porcentajehora"));
+            }
+            resultados.close();
+        return tipoNovedad;
+        
+    }
+    //Retorna todos los atributos de tipo novedad en una lista de tipo novedad
+      public ArrayList<TipoNovedadModelo> consultarTodoListaTipoNovedad() throws SQLException{
+        ArrayList<TipoNovedadModelo> tipoNovedades=new ArrayList<>();
+         String sql="SELECT * from TIPO_NOVEDAD";
+         Conexion conexion=new Conexion();
+            ResultSet resultados = conexion.consulta(sql);
+            while (resultados.next()) {
+               tipoNovedades.add(new TipoNovedadModelo(resultados.getString("nombre_novedad"),
+               resultados.getInt("id_tiponovedad"), resultados.getInt("id_concepto"), 
+                       resultados.getDouble("porcentajehora")));
+            }
+           resultados.close();
+        return tipoNovedades;
+        
+    }
 
 }

@@ -6,7 +6,6 @@
 package Vista;
 
 import Control.NovedadesControl;
-import Logica.NovedadesLogica;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -26,8 +25,6 @@ public class EdicionNovedades extends javax.swing.JPanel {
     Vistas vistas = new Vistas();
     DateFormat df = new SimpleDateFormat("dd/MM/YYYY");
     private int idNovedad;
-    private String idTraba;
-    private boolean actualizar = false;
 
     public EdicionNovedades(String idNovedad) throws SQLException, ParseException {
         initComponents();
@@ -831,9 +828,9 @@ public class EdicionNovedades extends javax.swing.JPanel {
             } else {
 
                 try {
-                    Principal.Escritorio.add(vistas.returnInternal(new ConsultaNovedadesVista(JTFIDtrabajador.getText()), "Consulta de novedades"));
-                    Principal.Escritorio.getSelectedFrame().dispose();
-                    Principal.Escritorio.selectFrame(true);
+                    EscritorioGestorNomina.Escritorio.add(vistas.returnInternal(new ConsultaNovedadesVista(JTFIDtrabajador.getText()), "Consulta de novedades"));
+                    EscritorioGestorNomina.Escritorio.getSelectedFrame().dispose();
+                    EscritorioGestorNomina.Escritorio.selectFrame(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(EdicionNovedades.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -855,7 +852,7 @@ public class EdicionNovedades extends javax.swing.JPanel {
             boolean esValido = false;//Llamar metodo
             NovedadesControl nvControl = new NovedadesControl();
             try {
-                esValido = nvControl.ExisteTrabPorCedula(idtrabajador);
+                esValido = nvControl.existeTrabPorCedula(idtrabajador);
             } catch (SQLException ex) {
                 Logger.getLogger(EdicionNovedades.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -20,10 +20,10 @@ public class MapeoModeloCursos {
     private String nombre;
     private String descripcion;
     private int codigo;
-    private String estado;
-    private String capacitador;
+    private int estado;
+    private int capacitador;
 
-    public MapeoModeloCursos(String nombre, String descripcion, int codigo, String estado, String capacitador) {
+    public MapeoModeloCursos(String nombre, String descripcion, int codigo, int estado, int capacitador) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.codigo = codigo;
@@ -55,19 +55,19 @@ public class MapeoModeloCursos {
         this.codigo = codigo;
     }
 
-    public String getEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
 
-    public String getCapacitador() {
+    public int getCapacitador() {
         return capacitador;
     }
 
-    public void setCapacitador(String capacitador) {
+    public void setCapacitador(int capacitador) {
         this.capacitador = capacitador;
     }
 
@@ -79,6 +79,7 @@ public class MapeoModeloCursos {
         tablaCursos.addColumn("Capacitador");
         tablaCursos.addColumn("Estado");
         for (int i = 0; i < lista.size(); i++) {
+           
             MapeoModeloCursos listaCursos = lista.get(i);
             Object[] row = new Object[i];
             tablaCursos.addRow(row);

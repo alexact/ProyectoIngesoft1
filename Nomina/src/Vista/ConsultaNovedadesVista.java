@@ -173,10 +173,10 @@ public class ConsultaNovedadesVista extends javax.swing.JPanel {
         int cantHoras = Integer.parseInt(String.valueOf(tm.getValueAt(jTableNovedades.getSelectedRow(), 2)));
         NovedadesControl nvC = new NovedadesControl();
         try {
-            Principal.Escritorio.add(vista.returnInternal(
+            EscritorioGestorNomina.Escritorio.add(vista.returnInternal(
                     new EdicionNovedades(idNovedad),"Edición de novedades"));
-                    Principal.Escritorio.getSelectedFrame().dispose();
-                    Principal.Escritorio.selectFrame(true);
+                    EscritorioGestorNomina.Escritorio.getSelectedFrame().dispose();
+                    EscritorioGestorNomina.Escritorio.selectFrame(true);
           //  nvC.editarNovedades(idNovedad, cantHoras);
         } catch (SQLException ex) {
             Logger.getLogger(ConsultaNovedadesVista.class.getName()).log(Level.SEVERE, null, ex);
@@ -220,7 +220,7 @@ public class ConsultaNovedadesVista extends javax.swing.JPanel {
             boolean esValido = false;//Llamar metodo
             NovedadesControl nvControl = new NovedadesControl();
             try {
-                esValido = nvControl.ExisteTrabPorCedula(idtrabajador);
+                esValido = nvControl.existeTrabPorCedula(idtrabajador);
             } catch (SQLException ex) {
                 Logger.getLogger(JPanelRegistroNovedades.class.getName()).log(Level.SEVERE, null, ex);
             }

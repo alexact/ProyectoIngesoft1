@@ -5,9 +5,11 @@
  */
 package Logica;
 
+import Modelo.ListaConceptosModelo;
 import Modelo.NovedadModelo;
 import Modelo.NovedadesMapeo;
 import Modelo.TipoNovedadMapeo;
+import Modelo.TipoNovedadModelo;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -106,11 +108,11 @@ public class NovedadesLogica {
         System.out.println("nuluto " + tbL.retornarTrabajador(idTrabajador).getNombre());
         if (tbL.retornarTrabajador(idTrabajador).getNombre() != null
                 || tbL.retornarTrabajador(idTrabajador).getApellido() != null) {
-            setNombreTrabajador (tbL.retornarTrabajador(idTrabajador).getNombre()
+            setNombreTrabajador(tbL.retornarTrabajador(idTrabajador).getNombre()
                     + " " + tbL.retornarTrabajador(idTrabajador).getApellido());
             return true;
         } else {
-             setNombreTrabajador("El Trabajador no existe");
+            setNombreTrabajador("El Trabajador no existe");
             return false;
         }
 
@@ -125,7 +127,7 @@ public class NovedadesLogica {
     }
 
     public NovedadModelo editarNovedades(NovedadesLogica nL) throws SQLException {
-        System.out.println("Fechas "+nL.getFechaInicio());
+        System.out.println("Fechas " + nL.getFechaInicio());
         NovedadModelo novedadModelo = consultarNovedadesPorID(nL.getIdNovedades());
         novedadModelo.setNombreNovedad(nL.getNombreNovedad());
         novedadModelo.setCantidadHoras(nL.getCantidadHoras());
@@ -141,10 +143,10 @@ public class NovedadesLogica {
         NovedadesMapeo novedadesMapeo = new NovedadesMapeo();
         NovedadModelo nvM = novedadesMapeo.consultarNovedadPorIdNovedad(idNovedad);
         setIdtrabajador(nvM.getIdtrabajador());
-        setNombreTrabajador (nvM.getNombreNovedad());
-        setTipoNovedad (nvM.getTipoNovedad());
-        setNombreNovedad (nvM.getNombreNovedad());
-        setCantidadHoras (nvM.getCantidadHoras());
+        setNombreTrabajador(nvM.getNombreNovedad());
+        setTipoNovedad(nvM.getTipoNovedad());
+        setNombreNovedad(nvM.getNombreNovedad());
+        setCantidadHoras(nvM.getCantidadHoras());
         setFechaInicio(nvM.getFechaInicio());
         setFechaFin(nvM.getFechaFin());
         setIdNovedades(nvM.getIdNovedades());
@@ -177,7 +179,24 @@ public class NovedadesLogica {
             return tNM.consultarPorTiposDeNovedad(simbolo);
         }
     }
-
+/*
+    public ArrayList<ListaConceptosModelo> consultaParaNominaDeducciones(int idTrabajador) throws SQLException {
+        ArrayList<NovedadModelo> nvM=consultarNovedades(idTrabajador);
+        ArrayList<ListaConceptosModelo> lcM=new ArrayList<>();
+    
+        TipoNovedadLogica tvL=new TipoNovedadLogica();
+        ArrayList<String> tvLA=tvL.();
+        
+        for (tvLA.get) {
+            
+        }
+        for (NovedadModelo novedadModelo : nvM) {
+            if(novedadModelo.getTipoNovedad()
+             lcM.add(new ListaConceptosModelo(nombreNovedad, )
+        }
+       
+    }
+*/
     public DefaultTableModel listarNovedades(int idTrabajador) throws SQLException {
         ArrayList<NovedadModelo> novedadesModel = consultarNovedades(idTrabajador);
 
@@ -186,16 +205,14 @@ public class NovedadesLogica {
             @Override
             public boolean isCellEditable(int filas, int columnas) {
 
-                if (columnas >=0) {
+                if (columnas >= 0) {
                     return false;
                 }
                 return true;
             }
 
-            
-          
         };
-        
+
         tablaNovedades.addColumn("No.");
         tablaNovedades.addColumn("Tipo de Novedad");
         tablaNovedades.addColumn("Horas");

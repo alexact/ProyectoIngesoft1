@@ -120,11 +120,11 @@ public class NovedadesControl {
         this.idNovedades = idNovedades;
     }
     /**********
-     Para los metodos de ExisteTrabPorCedula y consultanombreTrabPorCedula
+     Para los metodos de existeTrabPorCedula y consultanombreTrabPorCedula
      se requiere el mismo objeto de nl por lo que  en el constructor de Novedades
      Control se inicializa.
      **********/
-    public boolean ExisteTrabPorCedula(int idTrabajador) throws SQLException{
+    public boolean existeTrabPorCedula(int idTrabajador) throws SQLException{
          
         return nl.consultarNombreTrabajador(idTrabajador);
     }

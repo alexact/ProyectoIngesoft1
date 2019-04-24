@@ -17,6 +17,7 @@ public class InterfazModificarCursos extends javax.swing.JPanel {
     
     private ControlCursos control;
     private ArrayList<String> arrInfo;
+    private String valorCombo;
     
     /**
      * Creates new form VistaAnadirCursos
@@ -56,7 +57,7 @@ public class InterfazModificarCursos extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         codigo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox = new javax.swing.JComboBox();
+        comboEstado = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -103,10 +104,10 @@ public class InterfazModificarCursos extends javax.swing.JPanel {
 
         jLabel4.setText("Codigo del Curso:");
 
-        jComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "En curso, con cupos", "En curso, sin cupos", "Finalizado", "Cancelado" }));
-        jComboBox.addActionListener(new java.awt.event.ActionListener() {
+        comboEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "En curso, con cupos", "En curso, sin cupos", "Finalizado", "Cancelado" }));
+        comboEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxActionPerformed(evt);
+                comboEstadoActionPerformed(evt);
             }
         });
 
@@ -155,7 +156,7 @@ public class InterfazModificarCursos extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(estado)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(comboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -179,7 +180,7 @@ public class InterfazModificarCursos extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(21, 21, 21)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -221,7 +222,9 @@ public class InterfazModificarCursos extends javax.swing.JPanel {
             if (nombre.getText().length() == 0 || descripcion.getText().length() == 0) {
                 JOptionPane.showMessageDialog(this, "Un campo se encuentra vacio.");
             } else {
-                control.modificarCurso(codigo.getText(), nombre.getText(), descripcion.getText(), estado.getText(), capacitador.getText());
+                
+                control.modificarCurso(codigo.getText(), nombre.getText(), descripcion.getText(), Integer.parseInt(estado.getText()),
+                        Integer.parseInt(capacitador.getText()));
                 JOptionPane.showMessageDialog(this, "Curso Modificado.");
             }
         } catch (Exception e) {
@@ -237,9 +240,15 @@ public class InterfazModificarCursos extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_codigoActionPerformed
 
-    private void jComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxActionPerformed
+    private void comboEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboEstadoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxActionPerformed
+        String var=comboEstado.getSelectedItem().toString();
+        if("En curso, con cupos".equals(var)){estado.setText("1");}
+        if("En curso, sin cupos".equals(var)){estado.setText("2");}
+        if("Finalizado".equals(var)){estado.setText("3");}
+        if("Cancelado".equals(var)){estado.setText("4");}
+       // estado.setText(comboEstado.getSelectedItem().toString());
+    }//GEN-LAST:event_comboEstadoActionPerformed
 
     private void estadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadoActionPerformed
         // TODO add your handling code here:
@@ -249,10 +258,10 @@ public class InterfazModificarCursos extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField capacitador;
     private javax.swing.JTextField codigo;
+    private javax.swing.JComboBox comboEstado;
     private javax.swing.JTextArea descripcion;
     private javax.swing.JTextField estado;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

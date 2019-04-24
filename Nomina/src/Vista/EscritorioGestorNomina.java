@@ -16,14 +16,14 @@ import javax.swing.JInternalFrame;
  *
  * @author salas
  */
-public class Principal extends javax.swing.JFrame {
+public class EscritorioGestorNomina extends javax.swing.JFrame {
 
     Vistas vista = new Vistas();
 
     /**
      * Creates new form Principal
      */
-    public Principal() throws SQLException {
+    public EscritorioGestorNomina() throws SQLException {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
         cm.subirALista();
@@ -51,6 +51,8 @@ public class Principal extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jBCrearNovedades = new javax.swing.JButton();
         jBConsultarNovedades = new javax.swing.JButton();
+        crearContrato = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         Escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -154,6 +156,29 @@ public class Principal extends javax.swing.JFrame {
         });
         jToolBar1.add(jBConsultarNovedades);
 
+        crearContrato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/add_page.png"))); // NOI18N
+        crearContrato.setText("Crear Contrato");
+        crearContrato.setFocusable(false);
+        crearContrato.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        crearContrato.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        crearContrato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crearContratoActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(crearContrato);
+
+        jButton6.setText("Atras");
+        jButton6.setFocusable(false);
+        jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton6);
+
         javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
@@ -247,7 +272,7 @@ public class Principal extends javax.swing.JFrame {
         try {
             Escritorio.add(vista.returnInternal(new JPanelRegistroNovedades(), "Registro de Novedades"));
         } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EscritorioGestorNomina.class.getName()).log(Level.SEVERE, null, ex);
         }
         Escritorio.selectFrame(true);
     }//GEN-LAST:event_jBCrearNovedadesActionPerformed
@@ -257,11 +282,27 @@ public class Principal extends javax.swing.JFrame {
             Escritorio.add(vista.returnInternal(new ConsultaNovedadesVista(null), "Consulta de novedades"));
            
         } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EscritorioGestorNomina.class.getName()).log(Level.SEVERE, null, ex);
         }
          
          Escritorio.selectFrame(true);
     }//GEN-LAST:event_jBConsultarNovedadesActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        this.setVisible(false);
+        usuarioPrincipal atras = new usuarioPrincipal();
+        atras.setVisible(true);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void crearContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearContratoActionPerformed
+        // TODO add your handling code here:
+        JInternalFrame interno = new JInternalFrame("Crear Contrato");
+        interno.add(new contratoTerminoIn());
+        interno.setVisible(true);
+        interno.pack();
+        interno.setClosable(true);
+        Escritorio.add(interno);
+    }//GEN-LAST:event_crearContratoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -280,14 +321,15 @@ public class Principal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EscritorioGestorNomina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EscritorioGestorNomina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EscritorioGestorNomina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EscritorioGestorNomina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -295,9 +337,9 @@ public class Principal extends javax.swing.JFrame {
             @Override
             public void run() {
                 try {
-                    new Principal().setVisible(true);
+                    new EscritorioGestorNomina().setVisible(true);
                 } catch (SQLException ex) {
-                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(EscritorioGestorNomina.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -305,6 +347,7 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane Escritorio;
+    private javax.swing.JButton crearContrato;
     private javax.swing.JButton jBConsultarNovedades;
     private javax.swing.JButton jBCrearNovedades;
     private javax.swing.JButton jButton1;
@@ -312,6 +355,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JToolBar jToolBar1;

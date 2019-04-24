@@ -7,17 +7,20 @@
 package Interfaz;
 
 import Control.ControlCursos;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author User
  */
-public class InterfazPrincipal extends javax.swing.JFrame {
+public class InterfazPrincipalCursos extends javax.swing.JFrame {
     
     /**
      * Creates new form Principal
      */
-    public InterfazPrincipal() {
+    public InterfazPrincipalCursos() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
     }
@@ -50,6 +53,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         });
         jToolBar1.add(botonCursos);
 
+        escritorio.setLayer(jToolBar1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
@@ -62,7 +67,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 265, Short.MAX_VALUE))
         );
-        escritorio.setLayer(jToolBar1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,8 +83,12 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCursosActionPerformed
-        // TODO add your handling code here:
-        escritorio.add(InterfazGestionPanel.returnInternal(new InterfazGestionarCursos(escritorio), "Gestión de Cursos"));
+        try {
+            // TODO add your handling code here:
+            escritorio.add(InterfazGestionPanel.returnInternal(new InterfazGestionarCursos(escritorio), "Gestión de Cursos"));
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazPrincipalCursos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botonCursosActionPerformed
 
     /**
@@ -100,20 +108,21 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InterfazPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfazPrincipalCursos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InterfazPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfazPrincipalCursos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InterfazPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfazPrincipalCursos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InterfazPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfazPrincipalCursos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InterfazPrincipal().setVisible(true);
+                new InterfazPrincipalCursos().setVisible(true);
             }
         });
     }

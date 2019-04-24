@@ -23,9 +23,7 @@ public class JPanelRegistroNovedades extends javax.swing.JPanel {
 
     Vistas vistas = new Vistas();
     DateFormat df = new SimpleDateFormat("dd/MM/YYYY");
-    private int idNovedad;
-    private String idTraba;
-    private boolean actualizar;
+
 
     public JPanelRegistroNovedades() throws SQLException {
         initComponents();
@@ -636,7 +634,7 @@ public class JPanelRegistroNovedades extends javax.swing.JPanel {
         if (JTFIDtrabajador.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(this, "Debe digitar la identificación del trabajador");
         } else {
-            NovedadesControl nl;
+            NovedadesControl nC;
             idtraba = Integer.parseInt(JTFIDtrabajador.getText());
             int horas = Integer.parseInt((jTextFHoraED.getText().trim().isEmpty()) ? "0" : jTextFHoraED.getText());
             String fechaInicio = null;
@@ -647,7 +645,7 @@ public class JPanelRegistroNovedades extends javax.swing.JPanel {
                     fechaInicio = df.format(jDateCHEDInicio.getDate());
                     fechaFin = df.format(jDateCHEDInicio.getDate());
                     try {
-                        nl = new NovedadesControl(idtraba, "Hora extra Diurna", horas, fechaInicio, fechaFin);
+                        nC = new NovedadesControl(idtraba, "Hora extra Diurna", horas, fechaInicio, fechaFin);
                         JOptionPane.showMessageDialog(this, "Se guardó con éxito las " + horas + " horas extras Diurnas");
                         jTextFHoraED.setText(null);
                     } catch (SQLException ex) {
@@ -664,7 +662,7 @@ public class JPanelRegistroNovedades extends javax.swing.JPanel {
                     fechaInicio = df.format(jDateCHENInicio.getDate());
                     fechaFin = df.format(jDateCHENInicio.getDate());
                     try {
-                        nl = new NovedadesControl(idtraba, "Hora extra Nocturna", horas, fechaInicio, fechaFin);
+                        nC = new NovedadesControl(idtraba, "Hora extra Nocturna", horas, fechaInicio, fechaFin);
                         JOptionPane.showMessageDialog(this, "Se guardó con éxito las " + horas + " horas extras Nocturnas");
                         jTextFHoraEN.setText(null);
                     } catch (SQLException ex) {
@@ -682,7 +680,7 @@ public class JPanelRegistroNovedades extends javax.swing.JPanel {
                     fechaFin = df.format(jDateCHEDDInicio.getDate());
                     //df.format(jDateCHEDDInicio.getDate().getTime()+(86400000*7));
                     try {
-                        nl = new NovedadesControl(idtraba, "HoraE Dominical/F Diurna", horas, fechaInicio, fechaFin);
+                        nC = new NovedadesControl(idtraba, "HoraE Dominical/F Diurna", horas, fechaInicio, fechaFin);
                         JOptionPane.showMessageDialog(this, "Se guardó con éxito las " + horas + " horas extras Dominical/F Diurna");
                         jTextFHoraEDDOM.setText(null);
                     } catch (SQLException ex) {
@@ -699,7 +697,7 @@ public class JPanelRegistroNovedades extends javax.swing.JPanel {
                     fechaInicio = df.format(jDateCHENDInicio.getDate());
                     fechaFin = df.format(jDateCHENDInicio.getDate());
                     try {
-                        nl = new NovedadesControl(idtraba, "HorE Dominical/F Nocturna", horas, fechaInicio, fechaFin);
+                        nC = new NovedadesControl(idtraba, "HorE Dominical/F Nocturna", horas, fechaInicio, fechaFin);
                         JOptionPane.showMessageDialog(this, "Se guardó con éxito las " + horas + " horas extras Dominical/F Nocturna");
                         jTextFHoraENDOM.setText(null);
                     } catch (SQLException ex) {
@@ -783,9 +781,9 @@ public class JPanelRegistroNovedades extends javax.swing.JPanel {
             } else {
                 
                 try {
-                    Principal.Escritorio.add(vistas.returnInternal(new ConsultaNovedadesVista(JTFIDtrabajador.getText()), "Consulta de novedades"));
-                    Principal.Escritorio.getSelectedFrame().dispose();
-                    Principal.Escritorio.selectFrame(true);
+                    EscritorioGestorNomina.Escritorio.add(vistas.returnInternal(new ConsultaNovedadesVista(JTFIDtrabajador.getText()), "Consulta de novedades"));
+                    EscritorioGestorNomina.Escritorio.getSelectedFrame().dispose();
+                    EscritorioGestorNomina.Escritorio.selectFrame(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(JPanelRegistroNovedades.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -807,7 +805,7 @@ public class JPanelRegistroNovedades extends javax.swing.JPanel {
             boolean esValido = false;//Llamar metodo
             NovedadesControl nvControl = new NovedadesControl();
             try {
-                esValido = nvControl.ExisteTrabPorCedula(idtrabajador);
+                esValido = nvControl.existeTrabPorCedula(idtrabajador);
             } catch (SQLException ex) {
                 Logger.getLogger(JPanelRegistroNovedades.class.getName()).log(Level.SEVERE, null, ex);
             }
